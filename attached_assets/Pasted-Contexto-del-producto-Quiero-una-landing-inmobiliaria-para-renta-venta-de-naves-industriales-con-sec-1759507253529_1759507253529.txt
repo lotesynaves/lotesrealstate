@@ -1,0 +1,207 @@
+Contexto del producto
+Quiero una landing inmobiliaria para renta/venta de naves industriales con secciones para casas, locales, oficinas y terrenos. Debe incluir:
+
+Backend con panel admin fácil de editar (CRUD propiedades, CRUD posts de blog, CRUD textos del sitio).
+
+Propiedades con imágenes + múltiples videos de YouTube (guardar solo youtube_id) y SEO por propiedad.
+
+Blog sencillo (posts con portada/galería, contenido rico y videos de YouTube).
+
+Formulario de contacto que guarda leads, envía correo y ofrece botón de WhatsApp con texto pre-llenado.
+
+Arquitectura modular, documentación clara y deploy en Replit.
+
+0) Reglas de trabajo (para minimizar errores)
+
+Trabaja por fases: primero genera requirements.md, design.md y tasks.md. Pausa y pídeme confirmación antes de escribir código.
+
+Usa Checkpoints después de cada fase importante (modelado, API, frontend, blog, formulario, deploy).
+
+Enumera archivos y rutas en cada paso (qué creas o modificas).
+
+No asumas secretos en código: usa Secrets (SMTP_*, EMAIL_TO, WHATSAPP_NUMBER, etc.) y provee .env.example.
+
+Tras cada bloque de código, corre breves pruebas/linters y comparte cómo ejecutarlas.
+
+Evita ambigüedad: si algo no es claro, pregunta antes de continuar.
+
+(Estas prácticas siguen la guía de prompting iterativo/por pasos, confirmaciones y enfoque en resultado recomendado por Replit.) 
+docs.replit.com
+
+1) Stack sugerido (elige y justifica)
+
+Opción A (Headless CMS): Strapi + SQLite para rapidez (admin incluido).
+
+Opción B (Node/Express): Prisma/SQLite + mini-admin en React (Vite).
+
+Frontend: React + Vite, routing sencillo (Home, Propiedad, Blog, Post).
+
+Por qué: facilita CRUD, media y validaciones; buen encaje con Agent y despliegues de Replit.
+
+Confírmame la opción y explica los trade-offs.
+
+2) Modelos / esquemas (proponer y pausar)
+
+Proponer esquemas y pausar para aprobación:
+
+properties
+
+title, slug, category (naves, casas, locales, oficinas, terrenos), operation (renta|venta), status (disponible|apartado|rentado|vendido), location { city, state, address, lat, lng }, area_m2, price, currency, features[], services[], cover_image, gallery[],
+
+videos[] de objetos { title, youtube_id, order } (guardar solo youtube_id; validar 11 chars)
+
+highlighted (bool), seo { meta_title, meta_description, canonical }, published_at
+
+categories (propiedades): name, key, description, icon
+site_content: textos de Hero/beneficios/CTAs + hero_video { title, youtube_id }
+leads: name, phone, email, message, property_ref, videos[], source, created_at
+Blog
+
+post_categories: name, slug, description
+
+post_tags: name, slug
+
+posts: title, slug, excerpt, cover_image, gallery[], videos[] (estructura igual a propiedades), content_rich (HTML/MD), category, tags[], author, published_at, seo { … }
+
+Hook YouTube (Strapi lifecycles o middleware Express): si el usuario pega una URL (watch?v=, youtu.be/, embed/), parsear y guardar solo youtube_id.
+
+(Pide mi OK antes de crear migraciones/tablas/colecciones.)
+
+3) API pública (REST)
+
+GET /api/properties?category=&operation=&min_area=&max_price=&page=&limit=
+
+GET /api/properties/:slug (incluye gallery, videos ordenados por order)
+
+GET /api/categories
+
+GET /api/site-content
+
+POST /api/leads (guarda y envía correo; prepara mensaje de WhatsApp)
+
+Convenciones
+
+Paginación estándar.
+
+Sanitizar y no devolver secretos.
+
+Validaciones de entrada (tamaños, formatos, youtube_id).
+
+4) Frontend (UX)
+
+Home: Hero (imagen o botón “Ver video” → modal embed), propiedades destacadas (badge “Video” si videos.length>0), tabs: Naves|Casas|Locales|Oficinas|Terrenos, sección “Últimos artículos”, formulario de contacto, footer.
+
+Propiedad: portada, galería, bloque de videos (thumbnails → modal; lazy-load del iframe), ficha técnica, CTA WhatsApp.
+
+Blog listado: tarjetas con portada, categoría, fecha, excerpt, badge “Video” si aplica, filtros por categoría/tags.
+
+Post: portada, contenido rico, galería, bloque de videos, relacionados.
+
+SEO: metatags OG/Twitter, sitemap y robots, VideoObject/Article opcionales.
+
+5) Formulario (correo + WhatsApp)
+
+POST /api/leads: valida, guarda y envía correo (SMTP por Secrets).
+
+Mostrar botón “Continuar en WhatsApp” con texto:
+
+Hola, me interesa: {{title}} – {{APP_URL}}{{path}}
+{{#if firstVideo}}Video: https://youtu.be/{{youtube_id}}{{/if}}
+
+
+Honeypot simple + rate limit básico.
+
+6) DevX (calidad y editor Replit)
+
+Añade scripts en package.json: dev, build, start, lint, test.
+
+Tras cada módulo, Checkpoints y breve reporte de pruebas.
+
+Genera README.md con:
+
+Instalación y ejecución local.
+
+Cómo usar Secrets (SMTP/EMAIL_TO/WHATSAPP_NUMBER).
+
+Cómo crear/editar propiedades y posts (paso a paso con capturas si posible).
+
+Cómo pegar URLs de YouTube y cómo se extrae el ID.
+
+Cómo activar RSS (opcional) y sitemap.
+
+(Replit fomenta ciclos rápidos: iterar/ajustar prompt y outcomes, y usar el Agent para crear la app end-to-end.) 
+docs.replit.com
+
+7) Deploy en Replit (indica tipo y pasos)
+
+Propón el tipo de Deployment más adecuado (Static para SPA, o Autoscale/Reserved VM si hay backend), explica por qué y pídeme confirmación. 
+docs.replit.com
++1
+
+Entrega comandos de build/run y salud/readiness si aplica.
+
+Crea un job de build y guía de cómo redeployar.
+
+Al final, imprime la URL pública y una lista de verificación manual (smoke test: Home, detalle propiedad, formulario, blog, SEO tags).
+
+8) Seeds y demo
+
+6 propiedades demo (3 naves, 1 casa, 1 local, 1 terreno) con 3–5 imágenes y ≥1 video.
+
+4 posts demo (2 con video).
+
+Hero con hero_video de ejemplo.
+
+Categorías y tags de blog precargados.
+
+9) Secrets requeridos (definir y no hardcodear)
+
+SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, EMAIL_TO
+
+WHATSAPP_NUMBER
+
+APP_URL
+
+Entrega .env.example y explica cómo mapearlos en Secrets de Replit.
+
+10) Validaciones clave
+
+youtube_id con 11 caracteres válidos ([A-Za-z0-9_-]).
+
+Slugs únicos.
+
+Números (área/precio) y rangos.
+
+Sanitización de HTML en content_rich (evitar XSS).
+
+413/limitar tamaño de imágenes (si subidas locales).
+
+11) Entregables por Fase (con pausa)
+
+Fase A → requirements.md, design.md, tasks.md.
+Fase B → Modelos + hooks YouTube + endpoints base.
+Fase C → Frontend (Home/Propiedad/Blog/Post) + componentes.
+Fase D → Formulario/Leads + correo + WhatsApp.
+Fase E → SEO + sitemap + robots.
+Fase F → Seeds + README + Deploy.
+(En cada fase: lista de archivos creados, comandos, pruebas y Checkpoint.)
+
+Inicia ahora con la Fase A y pausa para revisión.
+
+Cuando completes A, espera mi confirmación antes de pasar a B.
+
+Por qué este prompt funciona bien en Replit
+
+Divide y confirma: Replit Agent rinde mejor con requerimientos por pasos y confirmaciones entre fases (iteración guiada). 
+docs.replit.com
+
+Enfoque en resultado: pedimos outcomes (docs, rutas, comandos, deploy) en vez de “magia”, lo que recomiendan los equipos de Replit. 
+docs.replit.com
++1
+
+Compatibilidad con Deployments: pedimos al agente justificar el tipo (Static/Autoscale/VM) según backend, siguiendo docs de despliegue. 
+docs.replit.com
++1
+
+Agents & Automations: si luego quieres bots o tareas programadas, el proyecto ya queda modular para eso. 
+docs.replit.com
