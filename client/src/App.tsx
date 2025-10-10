@@ -1,53 +1,45 @@
-import { useState, useEffect } from "react";
+import React from 'react';
 import { Switch, Route } from "wouter";
-import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Home from "@/pages/Home";
-import NotFound from "@/pages/not-found";
-
+import { Toaster } from "./components/ui/toaster";
+import { TooltipProvider } from "./components/ui/tooltip";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { queryClient } from "./lib/queryClient";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import AboutUs from "./pages/AboutUs";
+import NotFound from "./pages/not-found";
+import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/about" component={AboutUs} />
       <Route component={NotFound} />
     </Switch>
   );
 }
 
 function App() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
-  };
-
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <div className="min-h-screen flex flex-col">
-          <Header theme={theme} onThemeToggle={toggleTheme} />
-          <main className="flex-1">
-            <Router />
-          </main>
-          <Footer />
-        </div>
-        <Toaster />
-      </TooltipProvider>
+      <ThemeProvider>
+        <TooltipProvider>
+          <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
+            <Header />
+            <main className="flex-1 relative">
+              <Router />
+              <FloatingWhatsAppButton
+                phoneNumber="+1234567890"
+                message="¡Hola! Estoy interesado en sus propiedades industriales."
+              />
+            </main>
+            <Footer />
+            <Toaster />
+          </div>
+        </TooltipProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

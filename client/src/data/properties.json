@@ -1,0 +1,105 @@
+{
+    "_comment": "Documentación de Propiedades\n\n  Estructura general de una propiedad:\n  - id: Identificador único (string o número)\n  - title: Título descriptivo de la propiedad (string)\n  - category: Debe coincidir con las categorías definidas en categories.json\n  - operation: 'renta' o 'venta'\n  - location: Ubicación de la propiedad (string)\n  - area: Área total en metros cuadrados (número)\n  - price: Precio (número)\n  - currency: Símbolo de moneda (ej: '$', '€')\n  - coverImage: URL de la imagen principal\n  - hasVideos: true/false si tiene videos disponibles\n  - features: Objeto con características específicas por tipo de propiedad\n\n  Características específicas por categoría (features):\n  \n  1. Naves Industriales:\n     - bathrooms: Número de baños (número)\n     - parkingSpots: Número de cajones de estacionamiento (número)\n     - ceilingHeight: Altura de techo en metros (número)\n     - dockDoors: Número de muelles de carga (número)\n     - airConditioning: true/false\n     - officeArea: Área de oficina en m² (número, opcional)\n  \n  2. Locales Comerciales:\n     - bathrooms: Número de baños (número)\n     - parkingSpots: Número de cajones de estacionamiento (número)\n     - airConditioning: true/false\n     - frontage: Ancho de fachada en metros (número)\n     - footTraffic: 'bajo'/'medio'/'alto'\n     - restroom: true/false si tiene baño propio\n  \n  3. Oficinas:\n     - bathrooms: Número de baños (número)\n     - workstations: Número de estaciones de trabajo (número)\n     - meetingRooms: Número de salas de juntas (número)\n     - airConditioning: true/false\n     - reception: true/false si tiene recepción\n     - floor: Piso donde se ubica (número o 'PB' para planta baja)\n  \n  4. Casas:\n     - bedrooms: Número de recámaras (número)\n     - bathrooms: Número de baños (número.entero)\n     - parkingSpots: Número de cajones de estacionamiento (número)\n     - levels: Número de niveles (número)\n     - furnished: true/false si está amueblada\n     - garden: true/false si tiene jardín\n  \n  5. Terrenos:\n     - zoning: Zonificación (ej: 'Residencial', 'Comercial', 'Industrial')\n     - utilities: true/false si cuenta con servicios\n     - frontage: Frente en metros (número)\n     - topography: 'plano'/'inclinado'/'irregular'\n     - landUse: Uso de suelo (string descriptivo)\n  ",
+    "properties": [
+        {
+            "id": "nav-001",
+            "title": "Nave Industrial en Parque Industrial Querétaro",
+            "category": "Naves Industriales",
+            "operation": "renta",
+            "location": "Querétaro, Parque Industrial El Marqués",
+            "area": 2500,
+            "price": 85000,
+            "currency": "$",
+            "coverImage": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
+            "hasVideos": true,
+            "features": {
+                "bathrooms": 4,
+                "parkingSpots": 10,
+                "ceilingHeight": 8,
+                "dockDoors": 4,
+                "airConditioning": true,
+                "officeArea": 200
+            }
+        },
+        {
+            "id": "loc-001",
+            "title": "Local Comercial en Plaza Premium",
+            "category": "Locales Comerciales",
+            "operation": "renta",
+            "location": "Guadalajara, Zona Centro",
+            "area": 180,
+            "price": 45000,
+            "currency": "$",
+            "coverImage": "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800&q=80",
+            "hasVideos": true,
+            "features": {
+                "bathrooms": 2,
+                "parkingSpots": 5,
+                "airConditioning": true,
+                "frontage": 8,
+                "footTraffic": "alto",
+                "restroom": true
+            }
+        },
+        {
+            "id": "ofi-001",
+            "title": "Oficinas Corporativas Ejecutivas",
+            "category": "Oficinas",
+            "operation": "renta",
+            "location": "Ciudad de México, Polanco",
+            "area": 320,
+            "price": 75000,
+            "currency": "$",
+            "coverImage": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80",
+            "hasVideos": false,
+            "features": {
+                "bathrooms": 3,
+                "workstations": 20,
+                "meetingRooms": 4,
+                "airConditioning": true,
+                "reception": true,
+                "floor": 12
+            }
+        },
+        {
+            "id": "casa-001",
+            "title": "Casa Moderna en Residencial Cerrado",
+            "category": "Casas",
+            "operation": "venta",
+            "location": "San Pedro Garza García, Nuevo León",
+            "area": 380,
+            "price": 12500000,
+            "currency": "$",
+            "coverImage": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80",
+            "hasVideos": true,
+            "features": {
+                "bedrooms": 4,
+                "bathrooms": 4.5,
+                "parkingSpots": 3,
+                "levels": 2,
+                "furnished": false,
+                "garden": true
+            }
+        },
+        {
+            "id": "terr-001",
+            "title": "Terreno Comercial en Avenida Principal",
+            "category": "Terrenos",
+            "operation": "venta",
+            "location": "Monterrey, San Nicolás de los Garza",
+            "area": 1200,
+            "price": 3800000,
+            "currency": "$",
+            "coverImage": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80",
+            "hasVideos": false,
+            "features": {
+                "zoning": "Comercial",
+                "utilities": true,
+                "frontage": 25,
+                "topography": "plano",
+                "landUse": "Uso comercial y de servicios"
+            }
+        }
+    ],
+    "properties_added": []
+}

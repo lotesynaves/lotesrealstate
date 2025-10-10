@@ -1,0 +1,40 @@
+{
+  "categories": [
+    {
+      "key": "all",
+      "label": "Todas",
+      "icon": "Warehouse",
+      "description": "Todas las propiedades disponibles"
+    },
+    {
+      "key": "naves",
+      "label": "Naves Industriales",
+      "icon": "Warehouse",
+      "description": "Amplios espacios para operaciones industriales"
+    },
+    {
+      "key": "casas",
+      "label": "Casas",
+      "icon": "Home",
+      "description": "Viviendas residenciales"
+    },
+    {
+      "key": "locales",
+      "label": "Locales Comerciales",
+      "description": "Espacios comerciales en zonas estratégicas",
+      "icon": "Store"
+    },
+    {
+      "key": "oficinas",
+      "label": "Oficinas",
+      "description": "Espacios de trabajo profesionales",
+      "icon": "Building"
+    },
+    {
+      "key": "terrenos",
+      "label": "Terrenos",
+      "description": "Terrenos para desarrollo inmobiliario",
+      "icon": "LandPlot"
+    }
+  ]
+}

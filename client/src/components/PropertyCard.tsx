@@ -2,11 +2,13 @@ import { Building2, MapPin, Maximize2, Video } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 
+export type OperationType = "renta" | "venta";
+
 interface PropertyCardProps {
   id: string;
   title: string;
   category: string;
-  operation: "renta" | "venta";
+  operation: OperationType;
   location: string;
   area: number;
   price: number;

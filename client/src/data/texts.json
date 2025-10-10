@@ -1,0 +1,31 @@
+{
+  "hero": {
+    "title": "Encuentra la propiedad industrial perfecta para tu negocio",
+    "subtitle": "Soluciones inmobiliarias industriales a tu medida",
+    "ctaPrimary": "Ver Propiedades",
+    "ctaSecondary": "Ver Video",
+    "features": [
+      "+100 propiedades disponibles",
+      "Asesoría especializada",
+      "Financiamiento disponible"
+    ]
+  },
+  "featuredProperties": {
+    "title": "Propiedades Destacadas",
+    "subtitle": "Explora nuestra selección de propiedades industriales y comerciales premium"
+  },
+  "blog": {
+    "title": "Últimos Artículos",
+    "subtitle": "Mantente informado sobre el mercado inmobiliario industrial"
+  },
+  "contact": {
+    "title": "¿Tienes dudas? Contáctanos",
+    "subtitle": "Nuestro equipo está listo para ayudarte a encontrar la propiedad ideal para tu negocio"
+  },
+  "buttons": {
+    "viewAll": "Ver Todas las Propiedades",
+    "contact": "Contactar Asesor",
+    "readMore": "Leer más",
+    "close": "Cerrar"
+  }
+}

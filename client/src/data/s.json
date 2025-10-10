@@ -1,0 +1,402 @@
+{
+  "properties": [
+    {
+      "id": "1",
+      "title": "Elvoratec",
+      "category": "Naves Industriales",
+      "operation": "renta",
+      "location": "Querétaro, Parque Industrial El Marqués",
+      "area": 2500,
+      "price": 85000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
+      "hasVideos": true,
+      "features": {
+        "bathrooms": 4,
+        "parkingSpots": 10,
+        "ceilingHeight": 8,
+        "dockDoors": 2
+      }
+    },
+    {
+      "id": "2",
+      "title": "Bodega Industrial 3,000 m² Ubicación Estratégica",
+      "category": "Naves Industriales",
+      "operation": "venta",
+      "location": "Monterrey, Santa Catarina",
+      "area": 3000,
+      "price": 12500000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
+      "hasVideos": true,
+      "features": {
+        "bathrooms": 6,
+        "parkingSpots": 15,
+        "ceilingHeight": 10,
+        "dockDoors": 4
+      }
+    },
+    {
+      "id": "3",
+      "title": "Local Comercial en Plaza Premium",
+      "category": "Locales Comerciales",
+      "operation": "renta",
+      "location": "Guadalajara, Zona Centros Comerciales",
+      "area": 180,
+      "price": 45000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=800&q=80",
+      "hasVideos": false,
+      "features": {
+        "bathrooms": 2,
+        "parkingSpots": 5,
+        "airConditioning": true,
+        "frontage": 8
+      }
+    },
+    {
+      "id": "4",
+      "title": "Oficina Corporativa Equipada",
+      "category": "Oficinas",
+      "operation": "renta",
+      "location": "Ciudad de México, Santa Fe",
+      "area": 250,
+      "price": 65000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
+      "hasVideos": true,
+      "features": {
+        "bathrooms": 3,
+        "parkingSpots": 8,
+        "meetingRooms": 2,
+        "workstations": 15
+      }
+    },
+    {
+      "id": "5",
+      "title": "Terreno Industrial 5,000 m²",
+      "category": "Terrenos",
+      "operation": "venta",
+      "location": "San Luis Potosí, Zona Industrial",
+      "area": 5000,
+      "price": 8000000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80",
+      "hasVideos": false,
+      "features": {
+        "zoning": "Industrial",
+        "utilities": true,
+        "access": "Camino pavimentado"
+      }
+    },
+    {
+      "id": "6",
+      "title": "Casa en Fraccionamiento Privado",
+      "category": "Casas",
+      "operation": "venta",
+      "location": "Querétaro, Juriquilla",
+      "area": 320,
+      "price": 4500000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80",
+      "hasVideos": true,
+      "features": {
+        "bedrooms": 4,
+        "bathrooms": 3.5,
+        "parkingSpots": 2,
+        "garden": true,
+        "levels": 2
+      }
+    }
+  ],
+  "properties_added": [
+    {
+      "id": "7",
+      "title": "Bodega Logística con Área de Oficinas",
+      "category": "Naves Industriales",
+      "operation": "renta",
+      "location": "Guadalajara, El Salto",
+      "area": 3500,
+      "price": 120000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&q=80",
+      "hasVideos": false,
+      "features": {
+        "bathrooms": 6,
+        "parkingSpots": 15,
+        "ceilingHeight": 9,
+        "dockDoors": 4,
+        "officeArea": 200,
+        "airConditioning": true
+      }
+    },
+    {
+      "id": "8",
+      "title": "Local Comercial en Plaza Premium",
+      "category": "Locales Comerciales",
+      "operation": "renta",
+      "location": "Monterrey, San Pedro Garza García",
+      "area": 180,
+      "price": 45000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+      "hasVideos": true,
+      "features": {
+        "bathrooms": 2,
+        "frontage": 10,
+        "airConditioning": true,
+        "security": true
+      }
+    },
+    {
+      "id": "9",
+      "title": "Oficinas Ejecutivas Amuebladas",
+      "category": "Oficinas",
+      "operation": "renta",
+      "location": "Ciudad de México, Polanco",
+      "area": 150,
+      "price": 65000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=800&q=80",
+      "hasVideos": false,
+      "features": {
+        "workstations": 10,
+        "meetingRooms": 2,
+        "bathrooms": 2,
+        "airConditioning": true,
+        "furnished": true
+      }
+    },
+    {
+      "id": "10",
+      "title": "Terreno Industrial con Acceso a Carretera",
+      "category": "Terrenos",
+      "operation": "venta",
+      "location": "Aguascalientes, Zona Industrial",
+      "area": 10000,
+      "price": 3500000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=800&q=80",
+      "hasVideos": false,
+      "features": {
+        "frontage": 50,
+        "utilities": true,
+        "zoning": "Industrial",
+        "access": "Carretera federal"
+      }
+    },
+    {
+      "id": "11",
+      "title": "Casa Moderna con Alberca",
+      "category": "Casas",
+      "operation": "venta",
+      "location": "León, Guanajuato",
+      "area": 380,
+      "price": 6800000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=800&q=80",
+      "hasVideos": true,
+      "features": {
+        "bedrooms": 4,
+        "bathrooms": 3.5,
+        "parkingSpots": 2,
+        "garden": true,
+        "pool": true,
+        "levels": 2
+      }
+    },
+    {
+      "id": "12",
+      "title": "Nave con Área de Carga Aérea",
+      "category": "Naves Industriales",
+      "operation": "renta",
+      "location": "Toluca, Parque Industrial",
+      "area": 5000,
+      "price": 180000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=800&q=80",
+      "hasVideos": false,
+      "features": {
+        "bathrooms": 4,
+        "parkingSpots": 20,
+        "ceilingHeight": 12,
+        "dockDoors": 6,
+        "officeArea": 300,
+        "airConditioning": true
+      }
+    },
+    {
+      "id": "13",
+      "title": "Local en Planta Baja con Excelente Ubicación",
+      "category": "Locales Comerciales",
+      "operation": "venta",
+      "location": "Puebla, Angelópolis",
+      "area": 250,
+      "price": 7500000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=800&q=80",
+      "hasVideos": true,
+      "features": {
+        "bathrooms": 2,
+        "frontage": 15,
+        "airConditioning": true,
+        "basement": true
+      }
+    },
+    {
+      "id": "14",
+      "title": "Oficinas Corporativas en Torre Ejecutiva",
+      "category": "Oficinas",
+      "operation": "renta",
+      "location": "Guadalajara, Providencia",
+      "area": 400,
+      "price": 120000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=800&q=80",
+      "hasVideos": false,
+      "features": {
+        "workstations": 25,
+        "meetingRooms": 4,
+        "bathrooms": 4,
+        "airConditioning": true,
+        "receptionArea": true
+      }
+    },
+    {
+      "id": "15",
+      "title": "Terreno Residencial con Vistas Panorámicas",
+      "category": "Terrenos",
+      "operation": "venta",
+      "location": "Valle de Bravo, Estado de México",
+      "area": 2500,
+      "price": 5200000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
+      "hasVideos": true,
+      "features": {
+        "view": "Panorámica al lago",
+        "utilities": true,
+        "zoning": "Residencial",
+        "topography": "Plana"
+      }
+    },
+    {
+      "id": "16",
+      "title": "Casa de Lujo con Diseño Contemporáneo",
+      "category": "Casas",
+      "operation": "venta",
+      "location": "San Miguel de Allende, Guanajuato",
+      "area": 450,
+      "price": 12500000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80",
+      "hasVideos": true,
+      "features": {
+        "bedrooms": 5,
+        "bathrooms": 4.5,
+        "parkingSpots": 3,
+        "garden": true,
+        "pool": true,
+        "rooftop": true,
+        "levels": 2
+      }
+    },
+    {
+      "id": "17",
+      "title": "Bodega con Control de Clima",
+      "category": "Naves Industriales",
+      "operation": "renta",
+      "location": "Querétaro, Juriquilla",
+      "area": 2800,
+      "price": 95000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1600607686527-6fb886090705?w=800&q=80",
+      "hasVideos": false,
+      "features": {
+        "bathrooms": 3,
+        "parkingSpots": 12,
+        "ceilingHeight": 7,
+        "dockDoors": 3,
+        "temperatureControl": true,
+        "officeArea": 150
+      }
+    },
+    {
+      "id": "18",
+      "title": "Local en Centro Comercial de Lujo",
+      "category": "Locales Comerciales",
+      "operation": "renta",
+      "location": "Cancún, Zona Hotelera",
+      "area": 300,
+      "price": 85000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=800&q=80",
+      "hasVideos": true,
+      "features": {
+        "bathrooms": 2,
+        "frontage": 12,
+        "airConditioning": true,
+        "mallLocation": "Planta baja, frente a plaza principal"
+      }
+    },
+    {
+      "id": "19",
+      "title": "Oficinas en Edificio Inteligente",
+      "category": "Oficinas",
+      "operation": "renta",
+      "location": "Monterrey, San Pedro Garza García",
+      "area": 600,
+      "price": 180000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=80",
+      "hasVideos": false,
+      "features": {
+        "workstations": 35,
+        "meetingRooms": 5,
+        "bathrooms": 5,
+        "airConditioning": true,
+        "smartBuilding": true,
+        "gymAccess": true
+      }
+    },
+    {
+      "id": "20",
+      "title": "Terreno Comercial en Avenida Principal",
+      "category": "Terrenos",
+      "operation": "venta",
+      "location": "Tijuana, Zona Río",
+      "area": 1800,
+      "price": 9500000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=800&q=80",
+      "hasVideos": true,
+      "features": {
+        "frontage": 25,
+        "utilities": true,
+        "zoning": "Comercial",
+        "traffic": "Alto flujo vehicular"
+      }
+    },
+    {
+      "id": "21",
+      "title": "Casa de Playa con Acceso Privado",
+      "category": "Casas",
+      "operation": "renta",
+      "location": "Puerto Vallarta, Nuevo Vallarta",
+      "area": 520,
+      "price": 18500000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=800&q=80",
+      "hasVideos": true,
+      "features": {
+        "bedrooms": 6,
+        "bathrooms": 5.5,
+        "parkingSpots": 4,
+        "beachFront": true,
+        "pool": true,
+        "levels": 3,
+        "furnished": true
+      }
+    }
+  ]
+}

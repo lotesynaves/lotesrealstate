@@ -1,20 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Play, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Play } from "lucide-react";
 
 interface HeroSectionProps {
   onPlayVideo?: () => void;
-  onSearch?: (params: { location: string; category: string; operation: string }) => void;
 }
 
-export default function HeroSection({ onPlayVideo, onSearch }: HeroSectionProps) {
+export default function HeroSection({ onPlayVideo }: HeroSectionProps) {
   return (
     <div className="relative min-h-screen flex items-center justify-center">
       <div className="absolute inset-0 z-0">
@@ -35,15 +26,17 @@ export default function HeroSection({ onPlayVideo, onSearch }: HeroSectionProps)
           en las mejores ubicaciones de México
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
           <Button
+            asChild
             size="lg"
             variant="default"
-            className="gap-2 text-lg"
-            data-testid="button-search-properties"
+            className="gap-2 text-lg bg-primary hover:bg-primary/90"
+            data-testid="button-view-properties"
           >
-            <Search className="h-5 w-5" />
-            Buscar Propiedades
+            <a href="#propiedades">
+              Ver Propiedades
+            </a>
           </Button>
           <Button
             size="lg"
@@ -55,52 +48,6 @@ export default function HeroSection({ onPlayVideo, onSearch }: HeroSectionProps)
             <Play className="h-5 w-5" />
             Ver Video
           </Button>
-        </div>
-
-        <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-lg p-6 shadow-2xl">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Input
-              placeholder="Ubicación..."
-              className="md:col-span-2"
-              data-testid="input-location"
-            />
-            <Select>
-              <SelectTrigger data-testid="select-category">
-                <SelectValue placeholder="Categoría" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="naves">Naves Industriales</SelectItem>
-                <SelectItem value="casas">Casas</SelectItem>
-                <SelectItem value="locales">Locales Comerciales</SelectItem>
-                <SelectItem value="oficinas">Oficinas</SelectItem>
-                <SelectItem value="terrenos">Terrenos</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger data-testid="select-operation">
-                <SelectValue placeholder="Operación" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="renta">Renta</SelectItem>
-                <SelectItem value="venta">Venta</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-
-        <div className="mt-12 flex gap-8 justify-center text-white/90">
-          <div className="text-center">
-            <p className="text-4xl font-bold font-['DM_Sans']" data-testid="text-stat-properties">500+</p>
-            <p className="text-sm">Propiedades</p>
-          </div>
-          <div className="text-center">
-            <p className="text-4xl font-bold font-['DM_Sans']" data-testid="text-stat-clients">1,200+</p>
-            <p className="text-sm">Clientes Satisfechos</p>
-          </div>
-          <div className="text-center">
-            <p className="text-4xl font-bold font-['DM_Sans']" data-testid="text-stat-years">15+</p>
-            <p className="text-sm">Años de Experiencia</p>
-          </div>
         </div>
       </div>
     </div>

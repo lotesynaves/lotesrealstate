@@ -1,257 +1,296 @@
-import { useState } from "react";
-import { Warehouse, Home as HomeIcon, Store, Building, LandPlot } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
+import { Warehouse, HomeIcon, Store, Building, LandPlot } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
 import HeroSection from "@/components/HeroSection";
-import PropertyCard from "@/components/PropertyCard";
+import SearchBar from "@/components/SearchBar";
+import PropertyCard, { OperationType } from "@/components/PropertyCard";
 import CategoryTab from "@/components/CategoryTab";
 import BlogPostCard from "@/components/BlogPostCard";
-import ContactForm from "@/components/ContactForm";
 import VideoModal from "@/components/VideoModal";
+import PropertyDetailsModal from "@/components/PropertyDetailsModal";
 import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
 
-//todo: remove mock functionality - mock properties data
-const mockProperties = [
-  {
-    id: "1",
-    title: "Nave Industrial Moderna con Amplio Patio",
-    category: "Naves Industriales",
-    operation: "renta" as const,
-    location: "Querétaro, Parque Industrial El Marqués",
-    area: 2500,
-    price: 85000,
-    currency: "$",
-    coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
-    hasVideos: true,
-  },
-  {
-    id: "2",
-    title: "Bodega Industrial 3,000 m² Ubicación Estratégica",
-    category: "Naves Industriales",
-    operation: "venta" as const,
-    location: "Monterrey, Santa Catarina",
-    area: 3000,
-    price: 12500000,
-    currency: "$",
-    coverImage: "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
-    hasVideos: true,
-  },
-  {
-    id: "3",
-    title: "Local Comercial en Plaza Premium",
-    category: "Locales Comerciales",
-    operation: "renta" as const,
-    location: "Guadalajara, Zona Centros Comerciales",
-    area: 180,
-    price: 45000,
-    currency: "$",
-    coverImage: "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=800&q=80",
-    hasVideos: false,
-  },
-  {
-    id: "4",
-    title: "Oficina Corporativa Equipada",
-    category: "Oficinas",
-    operation: "renta" as const,
-    location: "Ciudad de México, Santa Fe",
-    area: 250,
-    price: 65000,
-    currency: "$",
-    coverImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
-    hasVideos: true,
-  },
-  {
-    id: "5",
-    title: "Terreno Industrial 5,000 m²",
-    category: "Terrenos",
-    operation: "venta" as const,
-    location: "San Luis Potosí, Zona Industrial",
-    area: 5000,
-    price: 8000000,
-    currency: "$",
-    coverImage: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80",
-    hasVideos: false,
-  },
-  {
-    id: "6",
-    title: "Casa en Fraccionamiento Privado",
-    category: "Casas",
-    operation: "venta" as const,
-    location: "Querétaro, Juriquilla",
-    area: 320,
-    price: 4500000,
-    currency: "$",
-    coverImage: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80",
-    hasVideos: true,
-  },
-];
+// Import data
+import propertiesData from "@/data/properties.json";
+import blogPostsData from "@/data/blogPosts.json";
+import categoriesData from "@/data/categories.json";
+import textsData from "@/data/texts.json";
+import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/toaster";
 
-//todo: remove mock functionality - mock blog posts
-const mockBlogPosts = [
-  {
-    title: "Cómo Elegir la Nave Industrial Perfecta para tu Negocio",
-    excerpt: "Descubre los factores clave que debes considerar al buscar una nave industrial.",
-    coverImage: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?w=800&q=80",
-    category: "Guías",
-    publishedAt: "15 Dic 2024",
-    hasVideos: true,
-  },
-  {
-    title: "Tendencias en Bienes Raíces Industriales 2024",
-    excerpt: "Análisis del mercado inmobiliario industrial y las proyecciones para el próximo año.",
-    coverImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
-    category: "Noticias",
-    publishedAt: "10 Dic 2024",
-    hasVideos: false,
-  },
-  {
-    id: "3",
-    title: "Ventajas de Invertir en Propiedades Industriales",
-    excerpt: "Por qué las propiedades industriales son una excelente opción de inversión.",
-    coverImage: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80",
-    category: "Inversión",
-    publishedAt: "5 Dic 2024",
-    hasVideos: true,
-  },
-];
+// Types
+interface PropertyFeatures {
+  bathrooms?: number;
+  parkingSpots?: number;
+  ceilingHeight?: number;
+  dockDoors?: number;
+  airConditioning?: boolean;
+  frontage?: number;
+  meetingRooms?: number;
+  workstations?: number;
+  zoning?: string;
+  levels?: number;
+  [key: string]: string | number | boolean | undefined; // For any additional properties
+}
 
-export default function Home() {
+interface Property {
+  id: string;
+  title: string;
+  category: string;
+  operation: OperationType;
+  location: string;
+  area: number;
+  price: number;
+  currency: string;
+  coverImage: string;
+  hasVideos: boolean;
+  features: PropertyFeatures;
+}
+
+// Type guard to check if operation is valid
+function isOperationType(value: string): value is OperationType {
+  return value === 'renta' || value === 'venta';
+}
+
+// Process and validate properties data
+const allProperties = [...propertiesData.properties, ...(propertiesData.properties_added || [])];
+
+const typedProperties: Property[] = allProperties.map(prop => {
+  // Create a new features object with all possible properties
+  const features: PropertyFeatures = {
+    // Spread all existing features first
+    ...prop.features,
+    // Ensure required features have default values if not provided
+    bathrooms: prop.features?.bathrooms ?? 0,
+    parkingSpots: prop.features?.parkingSpots ?? 0,
+    ceilingHeight: prop.features?.ceilingHeight ?? 0,
+    dockDoors: prop.features?.dockDoors ?? 0,
+  };
+
+  return {
+    ...prop,
+    operation: isOperationType(prop.operation) ? prop.operation : 'venta',
+    features
+  };
+});
+
+// Extraer datos de los archivos JSON
+const mockProperties = allProperties;
+const { blogPosts: mockBlogPosts } = blogPostsData;
+const { categories: categoriesList } = categoriesData;
+const { hero, featuredProperties, blog, contact, buttons } = textsData;
+
+// Mapear íconos de las categorías
+const iconComponents: Record<string, any> = {
+  Warehouse,
+  Home: HomeIcon,
+  Store,
+  Building,
+  LandPlot
+};
+
+// Añadir componentes de íconos a las categorías
+const categories = categoriesList.map(cat => ({
+  ...cat,
+  icon: iconComponents[cat.icon] || Warehouse,
+  count: cat.key === 'all'
+    ? mockProperties.length
+    : mockProperties.filter(p =>
+      p.category.toLowerCase().includes(cat.key.toLowerCase())
+    ).length
+}));
+
+const Home = () => {
+  const [location, setLocation] = useLocation();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  
+  // Check for propertyId in URL when component mounts
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const propertyId = params.get('propertyId');
+    
+    if (propertyId) {
+      const property = typedProperties.find(p => p.id === propertyId);
+      if (property) {
+        setSelectedProperty(property);
+      }
+    }
+  }, []);
+  
+  // Reset search params when changing category
+  const handleCategorySelect = (categoryKey: string) => {
+    setSelectedCategory(categoryKey === 'all' ? 'all' : categoryKey);
+    // Clear all search params when changing categories to avoid conflicts
+    setSearchParams({
+      location: '',
+      category: '',
+      operation: ''
+    });
+  };
   const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+  const [searchParams, setSearchParams] = useState({
+    location: '',
+    category: '',
+    operation: ''
+  });
 
-  const categories = [
-    { icon: Warehouse, label: "Todas", key: "all", count: mockProperties.length },
-    { icon: Warehouse, label: "Naves Industriales", key: "naves", count: 2 },
-    { icon: HomeIcon, label: "Casas", key: "casas", count: 1 },
-    { icon: Store, label: "Locales", key: "locales", count: 1 },
-    { icon: Building, label: "Oficinas", key: "oficinas", count: 1 },
-    { icon: LandPlot, label: "Terrenos", key: "terrenos", count: 1 },
-  ];
-
-  const filteredProperties = selectedCategory === "all"
-    ? mockProperties
-    : mockProperties.filter(p => {
-        const categoryMap: Record<string, string> = {
-          naves: "Naves Industriales",
-          casas: "Casas",
-          locales: "Locales Comerciales",
-          oficinas: "Oficinas",
-          terrenos: "Terrenos"
-        };
-        return p.category === categoryMap[selectedCategory];
+  const handleSearch = (params: { location: string; category: string; operation: string }) => {
+    // Only update search params if at least one field has a value
+    if (params.location || params.category || params.operation) {
+      setSearchParams({
+        location: params.location || '',
+        category: params.category || '',
+        operation: params.operation || ''
       });
+      // Reset selected category when using search to avoid conflicting filters
+      setSelectedCategory('all');
+    }
+  };
+
+  // Helper function to normalize category names for comparison
+  const normalizeCategory = (category: string) => {
+    return category.toLowerCase().replace(/\s+/g, '');
+  };
+
+  // Filter properties based on search params and selected category
+  const filteredProperties = typedProperties.filter(property => {
+    // Check search parameters
+    const matchesLocation = searchParams.location === '' ||
+      property.location.toLowerCase().includes(searchParams.location.toLowerCase().trim());
+      
+    // Only apply category filter from search if it's not empty
+    const matchesCategoryFromSearch = searchParams.category === '' ||
+      normalizeCategory(property.category).includes(normalizeCategory(searchParams.category));
+      
+    const matchesOperation = searchParams.operation === '' ||
+      property.operation === searchParams.operation.trim();
+
+    // Check selected category tab - this is the main category filter
+    const matchesSelectedCategory = selectedCategory === 'all' ||
+      normalizeCategory(property.category).includes(selectedCategory);
+
+    // Combine all conditions - all must be true
+    return (
+      matchesLocation &&
+      matchesCategoryFromSearch &&
+      matchesOperation &&
+      matchesSelectedCategory
+    );
+  });
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
+
+
       <HeroSection onPlayVideo={() => setVideoModalOpen(true)} />
 
-      <section className="max-w-7xl mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4" data-testid="text-featured-title">
-            Propiedades Destacadas
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Explora nuestra selección de propiedades industriales y comerciales premium
-          </p>
-        </div>
 
-        <div className="flex gap-2 overflow-x-auto pb-4 mb-8 scrollbar-hide">
-          {categories.map((cat) => (
-            <CategoryTab
-              key={cat.key}
-              icon={cat.icon}
-              label={cat.label}
-              count={cat.count}
-              active={selectedCategory === cat.key}
-              onClick={() => setSelectedCategory(cat.key)}
-            />
-          ))}
-        </div>
+      <section id="propiedades" className="py-12 px-4 container mx-auto">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProperties.map((property) => (
-            <PropertyCard
-              key={property.id}
-              {...property}
-              onClick={() => console.log('Property clicked:', property.id)}
-            />
-          ))}
-        </div>
 
-        <div className="text-center mt-12">
-          <Button size="lg" variant="outline" data-testid="button-view-all">
-            Ver Todas las Propiedades
-          </Button>
-        </div>
-      </section>
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold mb-6">Propiedades Destacadas</h2>
+          <SearchBar onSearch={handleSearch} onClearFilters={() => setSearchParams({ location: '', category: '', operation: '' })} />
+          {/* Category Tabs - Pills on mobile, Cards on larger screens */}
+          <div className="w-full mb-8 mt-6">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 px-2 sm:px-0">
+              {categories.map((category) => {
+                const isActive = selectedCategory === category.key;
+                const Icon = category.icon;
 
-      <section className="bg-card py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4" data-testid="text-blog-title">
-              Últimos Artículos
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Mantente informado sobre el mercado inmobiliario industrial
-            </p>
-          </div>
+                return (
+                  <button
+                    key={category.key}
+                    onClick={() => handleCategorySelect(category.key)}
+                    className={`
+                      relative flex items-center justify-between sm:justify-center
+                      px-4 py-2.5 sm:py-4 rounded-full sm:rounded-xl
+                      transition-all duration-200 ease-in-out
+                      border-2 
+                      hover:shadow-md active:scale-[0.98]
+                      sm:hover:-translate-y-1
+                      text-sm sm:text-base
+                      h-11 sm:h-32
+                      min-w-[120px] sm:min-w-0 sm:w-32
+                      ${isActive
+                        ? 'bg-blue-600 dark:bg-blue-700 text-white shadow-sm sm:shadow-md border-blue-700 dark:border-blue-600'
+                        : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-500'
+                      }
+                    `}
+                  >
+                    {/* Mobile View - Text and count with better spacing */}
+                    <div className="flex items-center justify-between w-full sm:hidden">
+                      <span className="font-medium text-sm">{category.label}</span>
+                      <span className={`flex items-center justify-center h-5 min-w-[24px] px-1.5 rounded-full text-xs font-medium ${
+                        isActive 
+                          ? 'bg-blue-500/90 text-white' 
+                          : 'bg-gray-100 dark:bg-gray-700/80 text-gray-600 dark:text-gray-300'
+                      }`}>
+                        {category.count}
+                      </span>
+                    </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {mockBlogPosts.map((post, index) => (
-              <BlogPostCard
-                key={index}
-                {...post}
-                onClick={() => console.log('Blog post clicked')}
-              />
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Button size="lg" variant="outline" data-testid="button-view-blog">
-              Ver Todos los Artículos
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <section className="max-w-7xl mx-auto px-4 py-20">
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          <div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6" data-testid="text-contact-title">
-              ¿Listo para Encontrar tu Propiedad Ideal?
-            </h2>
-            <p className="text-lg text-muted-foreground mb-6">
-              Nuestro equipo de expertos está listo para ayudarte a encontrar el espacio perfecto
-              para tu negocio. Contáctanos hoy mismo.
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Building className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">500+ Propiedades</h3>
-                  <p className="text-sm text-muted-foreground">En nuestra cartera</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Warehouse className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Asesoría Gratuita</h3>
-                  <p className="text-sm text-muted-foreground">Sin compromiso</p>
-                </div>
-              </div>
+                    {/* Desktop View - Full card with icon */}
+                    <div className="hidden sm:flex flex-col items-center justify-center w-full h-full px-2">
+                      <Icon 
+                        className={`h-8 w-8 mb-2.5 transition-colors duration-200 ${
+                          isActive 
+                            ? 'text-white' 
+                            : 'text-blue-600 dark:text-blue-400'
+                        }`} 
+                      />
+                      <span className="text-sm font-medium text-center leading-tight">{category.label}</span>
+                      <span className={`text-xs mt-1.5 ${
+                        isActive 
+                          ? 'text-blue-100/90 dark:text-blue-200/90' 
+                          : 'text-gray-500/90 dark:text-gray-400/90'
+                      }`}>
+                        ({category.count})
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          <div className="bg-card p-8 rounded-lg border">
-            <h3 className="text-2xl font-bold mb-6">Contáctanos</h3>
-            <ContactForm
-              onSubmit={(data) => console.log('Contact form submitted:', data)}
-            />
+          {/* Property Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProperties.map(property => (
+              <PropertyCard
+                key={property.id}
+                {...property}
+                onClick={() => setSelectedProperty(property)}
+              />
+            ))}
           </div>
         </div>
       </section>
+
+      {/* Contact Section */}
+      <section id="contacto" className="relative py-16 bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800 transition-colors duration-200">
+        {/* Background pattern - only visible in dark mode */}
+        <div className="absolute inset-0 hidden dark:block">
+          <div className="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]"></div>
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="dark:bg-gray-800/70 dark:backdrop-blur-sm dark:rounded-2xl dark:shadow-2xl dark:border dark:border-gray-700/50 dark:overflow-hidden">
+            <ContactForm />
+          </div>
+        </div>
+      </section>
+
+      {/* Property Details Modal */}
+      {selectedProperty && (
+        <PropertyDetailsModal
+          property={selectedProperty}
+          onClose={() => setSelectedProperty(null)}
+        />
+      )}
 
       <VideoModal
         isOpen={videoModalOpen}
@@ -259,6 +298,10 @@ export default function Home() {
         youtubeId="dQw4w9WgXcQ"
         title="Conoce Nuestras Propiedades"
       />
+
+
     </div>
   );
 }
+
+export default Home;

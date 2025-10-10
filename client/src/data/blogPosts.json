@@ -1,0 +1,43 @@
+{
+  "blogPosts": [
+    {
+      "id": "1",
+      "title": "Cómo Elegir la Nave Industrial Perfecta para tu Negocio",
+      "excerpt": "Descubre los factores clave que debes considerar al buscar una nave industrial.",
+      "content": "Contenido detallado del artículo sobre cómo elegir una nave industrial...",
+      "coverImage": "https://images.unsplash.com/photo-1580674285054-bed31e145f59?w=800&q=80",
+      "category": "Guías",
+      "publishedAt": "15 Dic 2024",
+      "author": "Equipo Industrial Realty Hub",
+      "readingTime": "5 min",
+      "hasVideos": true,
+      "tags": ["naves industriales", "inversión", "guía"]
+    },
+    {
+      "id": "2",
+      "title": "Tendencias en Bienes Raíces Industriales 2024",
+      "excerpt": "Análisis del mercado inmobiliario industrial y las proyecciones para el próximo año.",
+      "content": "Contenido detallado sobre las tendencias en bienes raíces industriales...",
+      "coverImage": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
+      "category": "Noticias",
+      "publishedAt": "10 Dic 2024",
+      "author": "Equipo Industrial Realty Hub",
+      "readingTime": "7 min",
+      "hasVideos": false,
+      "tags": ["tendencias", "mercado", "análisis"]
+    },
+    {
+      "id": "3",
+      "title": "Ventajas de Invertir en Propiedades Industriales",
+      "excerpt": "Por qué las propiedades industriales son una excelente opción de inversión.",
+      "content": "Contenido detallado sobre las ventajas de invertir en propiedades industriales...",
+      "coverImage": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80",
+      "category": "Inversión",
+      "publishedAt": "5 Dic 2024",
+      "author": "Equipo Industrial Realty Hub",
+      "readingTime": "6 min",
+      "hasVideos": true,
+      "tags": ["inversión", "rentabilidad", "propiedades industriales"]
+    }
+  ]
+}
