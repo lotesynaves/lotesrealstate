@@ -11,6 +11,12 @@
             "price": 85000,
             "currency": "$",
             "coverImage": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
+            "images": [
+              "https://images.unsplash.com/photo-1600585154340-4e4a6c1b1e2b?w=800&q=80",
+              "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&q=80",
+              "https://images.unsplash.com/photo-1600607687939-ce8a3bc22583?w=800&q=80",
+              "https://images.unsplash.com/photo-1600607686527-6fb886090705?w=800&q=80"
+            ],
             "hasVideos": true,
             "features": {
                 "bathrooms": 4,
@@ -31,6 +37,11 @@
             "price": 45000,
             "currency": "$",
             "coverImage": "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800&q=80",
+            "images": [
+              "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
+              "https://images.unsplash.com/photo-1560448204-6f6d0a9c682b?w=800&q=80",
+              "https://images.unsplash.com/photo-1560448204-5f9c5a3f6b2b?w=800&q=80"
+            ],
             "hasVideos": true,
             "features": {
                 "bathrooms": 2,
@@ -51,6 +62,11 @@
             "price": 75000,
             "currency": "$",
             "coverImage": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80",
+            "images": [
+              "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=80",
+              "https://images.unsplash.com/photo-1522071820081-009c2f7e3d1a?w=800&q=80",
+              "https://images.unsplash.com/photo-1521503862198-2ae9a997bbc5?w=800&q=80"
+            ],
             "hasVideos": false,
             "features": {
                 "bathrooms": 3,
@@ -71,6 +87,11 @@
             "price": 12500000,
             "currency": "$",
             "coverImage": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80",
+            "images": [
+              "https://images.unsplash.com/photo-1600585154340-4e4a6c1b1e2b?w=800&q=80",
+              "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&q=80",
+              "https://images.unsplash.com/photo-1600607687939-ce8a3bc22583?w=800&q=80"
+            ],
             "hasVideos": true,
             "features": {
                 "bedrooms": 4,
@@ -91,6 +112,10 @@
             "price": 3800000,
             "currency": "$",
             "coverImage": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80",
+            "images": [
+              "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80",
+              "https://images.unsplash.com/photo-1449156733865-aa5660d4d3da?w=800&q=80"
+            ],
             "hasVideos": false,
             "features": {
                 "zoning": "Comercial",
