@@ -10,6 +10,7 @@ export interface Property {
   price: number;
   currency: string;
   coverImage: string;
+  images?: string[]; // Nuevo campo para múltiples imágenes
   hasVideos: boolean;
   description?: string;
   features: {

@@ -30,10 +30,7 @@ function App() {
             <Header />
             <main className="flex-1 relative">
               <Router />
-              <FloatingWhatsAppButton
-                phoneNumber="+1234567890"
-                message="¡Hola! Estoy interesado en sus propiedades industriales."
-              />
+              <FloatingWhatsAppButton />
             </main>
             <Footer />
             <Toaster />
