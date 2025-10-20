@@ -31,7 +31,7 @@ export default function VideoModal({ isOpen, onClose, youtubeId, title }: VideoM
           <div className="relative pt-[56.25%]">
             <iframe
               className="absolute inset-0 w-full h-full"
-              src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1`}
+              // src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1`}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               data-testid="iframe-youtube"

@@ -1,130 +1,194 @@
 {
-    "_comment": "Documentación de Propiedades\n\n  Estructura general de una propiedad:\n  - id: Identificador único (string o número)\n  - title: Título descriptivo de la propiedad (string)\n  - category: Debe coincidir con las categorías definidas en categories.json\n  - operation: 'renta' o 'venta'\n  - location: Ubicación de la propiedad (string)\n  - area: Área total en metros cuadrados (número)\n  - price: Precio (número)\n  - currency: Símbolo de moneda (ej: '$', '€')\n  - coverImage: URL de la imagen principal\n  - hasVideos: true/false si tiene videos disponibles\n  - features: Objeto con características específicas por tipo de propiedad\n\n  Características específicas por categoría (features):\n  \n  1. Naves Industriales:\n     - bathrooms: Número de baños (número)\n     - parkingSpots: Número de cajones de estacionamiento (número)\n     - ceilingHeight: Altura de techo en metros (número)\n     - dockDoors: Número de muelles de carga (número)\n     - airConditioning: true/false\n     - officeArea: Área de oficina en m² (número, opcional)\n  \n  2. Locales Comerciales:\n     - bathrooms: Número de baños (número)\n     - parkingSpots: Número de cajones de estacionamiento (número)\n     - airConditioning: true/false\n     - frontage: Ancho de fachada en metros (número)\n     - footTraffic: 'bajo'/'medio'/'alto'\n     - restroom: true/false si tiene baño propio\n  \n  3. Oficinas:\n     - bathrooms: Número de baños (número)\n     - workstations: Número de estaciones de trabajo (número)\n     - meetingRooms: Número de salas de juntas (número)\n     - airConditioning: true/false\n     - reception: true/false si tiene recepción\n     - floor: Piso donde se ubica (número o 'PB' para planta baja)\n  \n  4. Casas:\n     - bedrooms: Número de recámaras (número)\n     - bathrooms: Número de baños (número.entero)\n     - parkingSpots: Número de cajones de estacionamiento (número)\n     - levels: Número de niveles (número)\n     - furnished: true/false si está amueblada\n     - garden: true/false si tiene jardín\n  \n  5. Terrenos:\n     - zoning: Zonificación (ej: 'Residencial', 'Comercial', 'Industrial')\n     - utilities: true/false si cuenta con servicios\n     - frontage: Frente en metros (número)\n     - topography: 'plano'/'inclinado'/'irregular'\n     - landUse: Uso de suelo (string descriptivo)\n  ",
-    "properties": [
-        {
-            "id": "nav-001",
-            "title": "Nave Industrial en Parque Industrial Querétaro",
-            "category": "Naves Industriales",
-            "operation": "renta",
-            "location": "Querétaro, Parque Industrial El Marqués",
-            "area": 2500,
-            "price": 85000,
-            "currency": "$",
-            "coverImage": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
-            "images": [
-              "https://images.unsplash.com/photo-1600585154340-4e4a6c1b1e2b?w=800&q=80",
-              "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&q=80",
-              "https://images.unsplash.com/photo-1600607687939-ce8a3bc22583?w=800&q=80",
-              "https://images.unsplash.com/photo-1600607686527-6fb886090705?w=800&q=80"
-            ],
-            "hasVideos": true,
-            "features": {
-                "bathrooms": 4,
-                "parkingSpots": 10,
-                "ceilingHeight": 8,
-                "dockDoors": 4,
-                "airConditioning": true,
-                "officeArea": 200
-            }
-        },
-        {
-            "id": "loc-001",
-            "title": "Local Comercial en Plaza Premium",
-            "category": "Locales Comerciales",
-            "operation": "renta",
-            "location": "Guadalajara, Zona Centro",
-            "area": 180,
-            "price": 45000,
-            "currency": "$",
-            "coverImage": "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800&q=80",
-            "images": [
-              "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
-              "https://images.unsplash.com/photo-1560448204-6f6d0a9c682b?w=800&q=80",
-              "https://images.unsplash.com/photo-1560448204-5f9c5a3f6b2b?w=800&q=80"
-            ],
-            "hasVideos": true,
-            "features": {
-                "bathrooms": 2,
-                "parkingSpots": 5,
-                "airConditioning": true,
-                "frontage": 8,
-                "footTraffic": "alto",
-                "restroom": true
-            }
-        },
-        {
-            "id": "ofi-001",
-            "title": "Oficinas Corporativas Ejecutivas",
-            "category": "Oficinas",
-            "operation": "renta",
-            "location": "Ciudad de México, Polanco",
-            "area": 320,
-            "price": 75000,
-            "currency": "$",
-            "coverImage": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80",
-            "images": [
-              "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=80",
-              "https://images.unsplash.com/photo-1522071820081-009c2f7e3d1a?w=800&q=80",
-              "https://images.unsplash.com/photo-1521503862198-2ae9a997bbc5?w=800&q=80"
-            ],
-            "hasVideos": false,
-            "features": {
-                "bathrooms": 3,
-                "workstations": 20,
-                "meetingRooms": 4,
-                "airConditioning": true,
-                "reception": true,
-                "floor": 12
-            }
-        },
-        {
-            "id": "casa-001",
-            "title": "Casa Moderna en Residencial Cerrado",
-            "category": "Casas",
-            "operation": "venta",
-            "location": "San Pedro Garza García, Nuevo León",
-            "area": 380,
-            "price": 12500000,
-            "currency": "$",
-            "coverImage": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80",
-            "images": [
-              "https://images.unsplash.com/photo-1600585154340-4e4a6c1b1e2b?w=800&q=80",
-              "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&q=80",
-              "https://images.unsplash.com/photo-1600607687939-ce8a3bc22583?w=800&q=80"
-            ],
-            "hasVideos": true,
-            "features": {
-                "bedrooms": 4,
-                "bathrooms": 4.5,
-                "parkingSpots": 3,
-                "levels": 2,
-                "furnished": false,
-                "garden": true
-            }
-        },
-        {
-            "id": "terr-001",
-            "title": "Terreno Comercial en Avenida Principal",
-            "category": "Terrenos",
-            "operation": "venta",
-            "location": "Monterrey, San Nicolás de los Garza",
-            "area": 1200,
-            "price": 3800000,
-            "currency": "$",
-            "coverImage": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80",
-            "images": [
-              "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80",
-              "https://images.unsplash.com/photo-1449156733865-aa5660d4d3da?w=800&q=80"
-            ],
-            "hasVideos": false,
-            "features": {
-                "zoning": "Comercial",
-                "utilities": true,
-                "frontage": 25,
-                "topography": "plano",
-                "landUse": "Uso comercial y de servicios"
-            }
-        }
-    ],
-    "properties_added": []
+  "properties": [
+    {
+      "id": "nav-001",
+      "title": "NAVETEC BUSINESS PARK SANTA ROSA 569.80m²",
+      "description": "Nave industrial ubicada en NAVETEC BUSINESS PARK SANTA ROSA. Cuenta con 569.80m² de terreno, 402m² de área operativa, oficina de 33m², mezanine de 33m², y 2 medios baños. Incluye una rampa, un andén con placa niveladora, cisterna de 2,500L, instalación eléctrica trifásica 220V, y sistema termoacústico. El parque ofrece seguridad 24/7, calles amplias y urbanización de concreto armado.",
+      "category": "Naves Industriales",
+      "operation": "venta",
+      "location": "Santa Rosa Jáuregui, Querétaro",
+      "area": 569.8,
+      "price": 8900000,
+      "currency": "$",
+      "coverImage": "https://plus.unsplash.com/premium_photo-1664300060387-cdfc7c6142c3?ixlib=rb-4.1.0&auto=format&fit=crop&q=80&w=1170",
+      "images": [
+        "https://images.unsplash.com/photo-1581093421872-34f081b5cc1e?w=1200&q=80",
+        "https://images.unsplash.com/photo-1581093588401-22da25967d87?w=1200&q=80",
+        "https://images.unsplash.com/photo-1556742400-b5a63e27c4df?w=1200&q=80"
+      ],
+      "hasVideos": false,
+      "features": {
+        "bathrooms": 2,
+        "parkingSpots": "sin informacion",
+        "ceilingHeight": 9,
+        "dockDoors": 1,
+        "airConditioning": "sin informacion",
+        "officeArea": 33
+      },
+      "maintenanceCost": 2675
+    },
+    {
+      "id": "nav-002",
+      "title": "PRACTIPARK 450m²",
+      "description": "Nave industrial dentro de PRACTIPARK NORTE, un micro parque logístico de clase mundial ubicado estratégicamente en Querétaro, México. Lote de 450m² con construcción de 360m². Incluye infraestructura completa: vigilancia 24/7, acceso controlado, planta tratadora, alumbrado público, drenaje y servicios de voz y datos. Ideal para logística, almacenamiento o industria ligera.",
+      "category": "Naves Industriales",
+      "operation": "venta",
+      "location": "Querétaro, México",
+      "area": 450,
+      "price": 5600000,
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1593642634367-d91a135587b5?w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1599940826016-4c1f53a4c0f5?w=1200&q=80",
+        "https://images.unsplash.com/photo-1600585154340-4e4a6c1b1e2b?w=1200&q=80",
+        "https://images.unsplash.com/photo-1599940825916-3c1f53a4c0f5?w=1200&q=80"
+      ],
+      "hasVideos": false,
+      "features": {
+        "bathrooms": "sin informacion",
+        "parkingSpots": "sin informacion",
+        "ceilingHeight": "sin informacion",
+        "dockDoors": "sin informacion",
+        "airConditioning": "sin informacion",
+        "officeArea": "sin informacion"
+      },
+      "maintenanceCost": "sin informacion"
+    },
+    {
+      "id": "nav-003",
+      "title": "NAVETEC SUR57 Tipo B 300m²",
+      "description": "Nave tipo B (micronave) en NAVETEC SUR57, ubicada sobre la Autopista 57 en Querétaro. Terreno de 300m², con área operativa de 220m², rampa de 32m², 2 medios baños y altura libre de 7.1m. Equipada con cortinas en rampa y andén, cisterna de 2500L, sistema termoacústico y plataforma niveladora.",
+      "category": "Naves Industriales",
+      "operation": "venta",
+      "location": "Autopista 57, Querétaro",
+      "area": 300,
+      "price": "sin informacion",
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1615797534094-7fde0a4861f3?auto=format&fit=crop&q=80&w=1170",
+      "images": [
+        "https://images.unsplash.com/photo-1600585154340-4e4a6c1b1e2b?w=1200&q=80",
+        "https://images.unsplash.com/photo-1599940826016-4c1f53a4c0f5?w=1200&q=80",
+        "https://images.unsplash.com/photo-1581093421872-34f081b5cc1e?w=1200&q=80"
+      ],
+      "hasVideos": false,
+      "features": {
+        "bathrooms": 2,
+        "parkingSpots": 48,
+        "ceilingHeight": 7.1,
+        "dockDoors": 1,
+        "airConditioning": "sin informacion",
+        "officeArea": "sin informacion"
+      },
+      "maintenanceCost": "sin informacion"
+    },
+    {
+      "id": "nav-004",
+      "title": "NAVETEC SUR57 Tipo 1 - 569.8m²",
+      "description": "Nave industrial tipo 1 en NAVETEC SUR57, con lote de 569.8m², área operativa de 401.8m², oficina de 33m², andén de 60m² y rampa de 42m². Altura libre de 8m, sistema termoacústico, cisterna de 2500L, plataforma niveladora y electricidad trifásica.",
+      "category": "Naves Industriales",
+      "operation": "venta",
+      "location": "Autopista 57, Querétaro",
+      "area": 569.8,
+      "price": "sin informacion",
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1671558103046-a27c7ed86277?auto=format&fit=crop&q=80&w=1074",
+      "images": [
+        "https://images.unsplash.com/photo-1581093588401-22da25967d87?w=1200&q=80",
+        "https://images.unsplash.com/photo-1556742400-b5a63e27c4df?w=1200&q=80",
+        "https://images.unsplash.com/photo-1562072543-2b5bdb60f83c?w=1200&q=80"
+      ],
+      "hasVideos": false,
+      "features": {
+        "bathrooms": 2,
+        "parkingSpots": 33,
+        "ceilingHeight": 8,
+        "dockDoors": 1,
+        "airConditioning": "sin informacion",
+        "officeArea": 33
+      },
+      "maintenanceCost": "sin informacion"
+    },
+    {
+      "id": "nav-005",
+      "title": "NAVETEC PEDRO ESCOBEDO II Tipo A 300m²",
+      "description": "Nave tipo A en NAVETEC PEDRO ESCOBEDO II con lote de 300m², área operativa de 220m², rampa de 32m² y altura libre de 7.1m. Equipada con 2 medios baños, biodigestor, plataforma niveladora, sistema termoacústico y electricidad trifásica.",
+      "category": "Naves Industriales",
+      "operation": "venta",
+      "location": "Pedro Escobedo, Querétaro",
+      "area": 300,
+      "price": "sin informacion",
+      "currency": "$",
+      "coverImage": "https://plus.unsplash.com/premium_photo-1742418151224-85deebc22419?auto=format&fit=crop&q=80&w=1075",
+      "images": [
+        "https://images.unsplash.com/photo-1600585154340-4e4a6c1b1e2b?w=1200&q=80",
+        "https://images.unsplash.com/photo-1581093421872-34f081b5cc1e?w=1200&q=80",
+        "https://images.unsplash.com/photo-1599940826016-4c1f53a4c0f5?w=1200&q=80"
+      ],
+      "hasVideos": false,
+      "features": {
+        "bathrooms": 2,
+        "parkingSpots": 48,
+        "ceilingHeight": 7.1,
+        "dockDoors": "sin informacion",
+        "airConditioning": "sin informacion",
+        "officeArea": "sin informacion"
+      },
+      "maintenanceCost": "sin informacion"
+    },
+    {
+      "id": "nav-006",
+      "title": "NAVETEC PEDRO ESCOBEDO II Tipo B 484.12m²",
+      "description": "Nave tipo B en NAVETEC PEDRO ESCOBEDO II con lote de 484.12m², área operativa de 316.12m², oficina de 33m², estacionamiento de 33m², andén de 60m² y rampa de 42m². Altura libre de 9m. Equipamiento completo con 2 medios baños, biodigestor, cortinas en rampa y andén, plataforma niveladora, sistema termoacústico y electricidad trifásica.",
+      "category": "Naves Industriales",
+      "operation": "venta",
+      "location": "Pedro Escobedo, Querétaro",
+      "area": 484.12,
+      "price": "sin informacion",
+      "currency": "$",
+      "coverImage": "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1600607687939-ce8a3bc22583?w=1200&q=80",
+        "https://images.unsplash.com/photo-1600585154340-4e4a6c1b1e2b?w=1200&q=80",
+        "https://images.unsplash.com/photo-1599940826016-4c1f53a4c0f5?w=1200&q=80"
+      ],
+      "hasVideos": false,
+      "features": {
+        "bathrooms": 2,
+        "parkingSpots": 33,
+        "ceilingHeight": 9,
+        "dockDoors": 1,
+        "airConditioning": "sin informacion",
+        "officeArea": 33
+      },
+      "maintenanceCost": "sin informacion"
+    },
+    {
+      "id": "nav-007",
+      "title": "NAVETEC PEDRO ESCOBEDO II 569.8m²",
+      "description": "Oficina / Nave en NAVETEC PEDRO ESCOBEDO II con lote de 569.8m², área operativa de 402m², oficina de 33m², estacionamiento de 33m², andén de 60m² y rampa de 42m². Altura libre de 9m. Equipamiento completo con 2 medios baños, biodigestor, cortinas en rampa y andén, plataforma niveladora, sistema termoacústico y electricidad trifásica.",
+      "category": "Naves Industriales",
+      "operation": "venta",
+      "location": "Pedro Escobedo, Querétaro",
+      "area": 569.8,
+      "price": "sin informacion",
+      "currency": "$",
+      "coverImage": "https://plus.unsplash.com/premium_photo-1682146420929-762f3a79e529?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1172",
+      "images": [
+        "https://images.unsplash.com/photo-1600585154340-4e4a6c1b1e2b?w=1200&q=80",
+        "https://images.unsplash.com/photo-1581093421872-34f081b5cc1e?w=1200&q=80",
+        "https://images.unsplash.com/photo-1600607687939-ce8a3bc22583?w=1200&q=80"
+      ],
+      "hasVideos": false,
+      "features": {
+        "bathrooms": 2,
+        "parkingSpots": 33,
+        "ceilingHeight": 9,
+        "dockDoors": 1,
+        "airConditioning": "sin informacion",
+        "officeArea": 33
+      },
+      "maintenanceCost": "sin informacion"
+    }
+  ],
+  "properties_added": []
 }
