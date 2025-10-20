@@ -19,10 +19,10 @@
       "hasVideos": false,
       "features": {
         "bathrooms": 2,
-        "parkingSpots": "sin informacion",
+        "parkingSpots": "?",
         "ceilingHeight": 9,
         "dockDoors": 1,
-        "airConditioning": "sin informacion",
+        "airConditioning": "?",
         "officeArea": 33
       },
       "maintenanceCost": 2675
@@ -45,14 +45,14 @@
       ],
       "hasVideos": false,
       "features": {
-        "bathrooms": "sin informacion",
-        "parkingSpots": "sin informacion",
-        "ceilingHeight": "sin informacion",
-        "dockDoors": "sin informacion",
-        "airConditioning": "sin informacion",
-        "officeArea": "sin informacion"
+        "bathrooms": "?",
+        "parkingSpots": "?",
+        "ceilingHeight": "?",
+        "dockDoors": "?",
+        "airConditioning": "?",
+        "officeArea": "?"
       },
-      "maintenanceCost": "sin informacion"
+      "maintenanceCost": "?"
     },
     {
       "id": "nav-003",
@@ -62,7 +62,7 @@
       "operation": "venta",
       "location": "Autopista 57, Querétaro",
       "area": 300,
-      "price": "sin informacion",
+      "price": "?",
       "currency": "$",
       "coverImage": "https://images.unsplash.com/photo-1615797534094-7fde0a4861f3?auto=format&fit=crop&q=80&w=1170",
       "images": [
@@ -76,10 +76,10 @@
         "parkingSpots": 48,
         "ceilingHeight": 7.1,
         "dockDoors": 1,
-        "airConditioning": "sin informacion",
-        "officeArea": "sin informacion"
+        "airConditioning": "?",
+        "officeArea": "?"
       },
-      "maintenanceCost": "sin informacion"
+      "maintenanceCost": "?"
     },
     {
       "id": "nav-004",
@@ -89,7 +89,7 @@
       "operation": "venta",
       "location": "Autopista 57, Querétaro",
       "area": 569.8,
-      "price": "sin informacion",
+      "price": "?",
       "currency": "$",
       "coverImage": "https://images.unsplash.com/photo-1671558103046-a27c7ed86277?auto=format&fit=crop&q=80&w=1074",
       "images": [
@@ -103,10 +103,10 @@
         "parkingSpots": 33,
         "ceilingHeight": 8,
         "dockDoors": 1,
-        "airConditioning": "sin informacion",
+        "airConditioning": "?",
         "officeArea": 33
       },
-      "maintenanceCost": "sin informacion"
+      "maintenanceCost": "?"
     },
     {
       "id": "nav-005",
@@ -116,7 +116,7 @@
       "operation": "venta",
       "location": "Pedro Escobedo, Querétaro",
       "area": 300,
-      "price": "sin informacion",
+      "price": "?",
       "currency": "$",
       "coverImage": "https://plus.unsplash.com/premium_photo-1742418151224-85deebc22419?auto=format&fit=crop&q=80&w=1075",
       "images": [
@@ -129,11 +129,11 @@
         "bathrooms": 2,
         "parkingSpots": 48,
         "ceilingHeight": 7.1,
-        "dockDoors": "sin informacion",
-        "airConditioning": "sin informacion",
-        "officeArea": "sin informacion"
+        "dockDoors": "?",
+        "airConditioning": "?",
+        "officeArea": "?"
       },
-      "maintenanceCost": "sin informacion"
+      "maintenanceCost": "?"
     },
     {
       "id": "nav-006",
@@ -143,7 +143,7 @@
       "operation": "venta",
       "location": "Pedro Escobedo, Querétaro",
       "area": 484.12,
-      "price": "sin informacion",
+      "price": "?",
       "currency": "$",
       "coverImage": "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=1200&q=80",
       "images": [
@@ -157,10 +157,10 @@
         "parkingSpots": 33,
         "ceilingHeight": 9,
         "dockDoors": 1,
-        "airConditioning": "sin informacion",
+        "airConditioning": "?",
         "officeArea": 33
       },
-      "maintenanceCost": "sin informacion"
+      "maintenanceCost": "?"
     },
     {
       "id": "nav-007",
@@ -170,7 +170,7 @@
       "operation": "venta",
       "location": "Pedro Escobedo, Querétaro",
       "area": 569.8,
-      "price": "sin informacion",
+      "price": "?",
       "currency": "$",
       "coverImage": "https://plus.unsplash.com/premium_photo-1682146420929-762f3a79e529?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1172",
       "images": [
@@ -184,10 +184,10 @@
         "parkingSpots": 33,
         "ceilingHeight": 9,
         "dockDoors": 1,
-        "airConditioning": "sin informacion",
+        "airConditioning": "?",
         "officeArea": 33
       },
-      "maintenanceCost": "sin informacion"
+      "maintenanceCost": "?"
     }
   ],
   "properties_added": []
