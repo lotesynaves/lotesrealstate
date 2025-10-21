@@ -145,11 +145,12 @@ export default function PropertyDetailsModal({ property, onClose }: PropertyDeta
               >
                 {allImages.map((img, index) => (
                   <div key={index} className="outline-none">
-                    <div className="aspect-video bg-gray-100 dark:bg-gray-800">
+                    <div className="aspect-video bg-gray-100 dark:bg-gray-800 flex items-center justify-center overflow-hidden">
                       <img
                         src={img}
                         alt={`${property.title} - Imagen ${index + 1}`}
-                        className="w-full h-full object-cover"
+                        className="max-w-full max-h-full object-contain"
+                        style={{ width: 'auto', height: 'auto' }}
                         loading={index > 0 ? 'lazy' : 'eager'}
                       />
                     </div>
@@ -196,6 +197,7 @@ export default function PropertyDetailsModal({ property, onClose }: PropertyDeta
                               src={img}
                               alt={`Miniatura ${index + 1}`}
                               className="w-full h-full object-cover"
+                              style={{ objectPosition: 'center' }}
                               loading="lazy"
                             />
                           </div>
