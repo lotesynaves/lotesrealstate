@@ -1,4 +1,4 @@
-import { OperationType } from "@/components/PropertyCard";
+export type OperationType = 'sale' | 'rent' | 'lease';
 
 export interface Property {
   id: string;

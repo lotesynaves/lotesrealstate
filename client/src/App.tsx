@@ -11,11 +11,19 @@ import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import NotFound from "./pages/not-found";
 import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
+import Login from './pages/admin/Login';
+import { AuthProvider } from './contexts/AuthContext';
+import AdminRoutes from './pages/admin';
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/about" component={AboutUs} />
+      <AuthProvider>
+      <Route path="/lotesynavesadmin/login" component={Login}/>
+      <Route path="/lotesynavesadmin/dashboard" component={AdminRoutes}/>
+      </AuthProvider>
+        
       <Route component={NotFound} />
     </Switch>
   );

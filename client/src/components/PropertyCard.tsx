@@ -1,8 +1,7 @@
 import { Building2, MapPin, Maximize2, Video } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-
-export type OperationType = "renta" | "venta";
+import { OperationType } from "@/types/property";
 
 interface PropertyCardProps {
   id: string;
@@ -15,6 +14,11 @@ interface PropertyCardProps {
   currency: string;
   coverImage: string;
   hasVideos: boolean;
+  images?: string[];
+  description?: string;
+  features: {
+    [key: string]: string | number | boolean | undefined;
+  };
   onClick?: () => void;
 }
 
@@ -44,7 +48,7 @@ export default function PropertyCard({
         />
         <div className="absolute top-3 left-3 flex gap-2">
           <Badge className="bg-primary text-primary-foreground" data-testid={`badge-operation-${operation}`}>
-            {operation === "renta" ? "Renta" : "Venta"}
+            {operation === "rent" ? "Renta" : "Venta"}
           </Badge>
         </div>
         {hasVideos && (
