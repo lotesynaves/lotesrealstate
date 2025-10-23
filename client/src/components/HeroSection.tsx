@@ -7,11 +7,11 @@ interface HeroSectionProps {
 }
 
 const heroImages = [
-  '/images/hero/20190329_143712_.jpg',
-  '/images/hero/38cf88e28dc51b978a67a7f28f704453_Vestagrande.jpg',
-  '/images/hero/atardecer CCIMA Beta_2.jpg',
-  '/images/hero/navetec interior.jpg',
-  '/images/hero/navetec_02.jpg'
+  '/images/hero/1.jpg',
+  '/images/hero/2.jpg',
+  '/images/hero/3.jpg',
+  '/images/hero/4.jpg',
+  '/images/hero/5.jpg'
 ];
 
 export default function HeroSection({ onPlayVideo }: HeroSectionProps) {

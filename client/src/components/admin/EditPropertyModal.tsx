@@ -427,9 +427,9 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
                       value={formData.category}
                       onChange={handleChange}
                     >
-                      <option value="naves">Naves Industriales</option>
+                      <option value="naves industriales">Naves Industriales</option>
                       <option value="casas">Casas</option>
-                      <option value="locales">Locales Comerciales</option>
+                      <option value="locales comerciales">Locales Comerciales</option>
                       <option value="oficinas">Oficinas</option>
                       <option value="terrenos">Terrenos</option>
                     </select>
