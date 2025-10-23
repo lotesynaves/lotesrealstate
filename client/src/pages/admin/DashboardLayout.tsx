@@ -26,7 +26,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
+                <Link href="/">
                 <h1 className="text-xl font-bold text-gray-900">Panel de Administración</h1>
+                </Link>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                 <Link
