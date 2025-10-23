@@ -18,6 +18,7 @@ export interface Property extends Record<string, any> {
   maintenance_cost: number | null;
   properties_assets?: Array<{
     cover_image: string | null;
+    images?: { [key: string]: string };
   }>;
   cover_image?: string | null;
   assets?: {

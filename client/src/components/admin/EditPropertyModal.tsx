@@ -40,7 +40,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
   useEffect(() => {
     const loadPropertyData = async () => {
       if (!property) return;
-      
+
       try {
         // Fetch property assets if not already loaded
         let propertyAssets = property.properties_assets?.[0];
@@ -50,16 +50,17 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
             .select('*')
             .eq('propertie_id', property.propertie_id)
             .single();
-          
+
           if (error && error.code !== 'PGRST116') { // PGRST116 is "No rows returned"
             console.error('Error fetching property assets:', error);
           }
-          
+
           propertyAssets = assetsData || null;
         }
-
+        console.log("propertyAssets data: fdsfd", propertyAssets)
         // Set form data from property
-        setFormData({
+        setFormData(prev => ({
+          ...prev,
           title: property.title || '',
           description: property.description || '',
           price: property.price?.toString() || '',
@@ -77,11 +78,11 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
           office_area: property.office_area?.toString() || '',
           maintenance_cost: property.maintenance_cost?.toString() || '',
           cover_image: propertyAssets?.cover_image || ''
-        });
+        }));
 
         // Set images if they exist
-        if (property.images) {
-          setImages(property.images);
+        if (propertyAssets?.images) {
+          setImages(propertyAssets.images);
         } else if (property.assets?.images) {
           // Fallback to assets.images if available
           setImages(property.assets.images);
@@ -109,9 +110,9 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
         ...images,
         [newKey]: newImageUrl.trim()
       };
-      
+
       setImages(updatedImages);
-      
+
       // Set as cover image if it's the first one
       if (!formData.cover_image) {
         setFormData(prev => ({
@@ -119,35 +120,35 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
           cover_image: newImageUrl.trim()
         }));
       }
-      
+
       setNewImageUrl('');
     }
   };
 
   const removeImage = async (key: string) => {
     if (!property) return;
-    
+
     const newImages = { ...images };
     const imageUrl = newImages[key];
     delete newImages[key];
     setImages(newImages);
-    
+
     // If the removed image was the cover, update cover_image
     if (formData.cover_image === imageUrl) {
       const remainingImages = Object.values(newImages);
       const newCoverImage = remainingImages[0] || '';
-      
+
       setFormData(prev => ({
         ...prev,
         cover_image: newCoverImage
       }));
-      
+
       try {
         // Update the cover_image in the database if there are remaining images
         if (remainingImages.length > 0) {
           await supabase
             .from('properties_assets')
-            .update({ 
+            .update({
               cover_image: newCoverImage,
               images: newImages,
               updated_at: new Date().toISOString()
@@ -157,7 +158,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
           // If no images left, remove the cover image from the database
           await supabase
             .from('properties_assets')
-            .update({ 
+            .update({
               cover_image: null,
               images: null,
               updated_at: new Date().toISOString()
@@ -172,7 +173,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
       try {
         await supabase
           .from('properties_assets')
-          .update({ 
+          .update({
             images: newImages,
             updated_at: new Date().toISOString()
           })
@@ -181,7 +182,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
         console.error('Error updating images after removal:', err);
       }
     }
-    
+
     // If no images left, clear the cover image in the form
     if (Object.keys(newImages).length === 0) {
       setFormData(prev => ({
@@ -194,7 +195,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!property) return;
-    
+
     setLoading(true);
     setError('');
 
@@ -247,7 +248,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
         if (Object.keys(images).length > 0) {
           assetsData.images = images;
         }
-        
+
         // Set cover image if provided, otherwise use the first image
         if (formData.cover_image) {
           assetsData.cover_image = formData.cover_image;
@@ -298,7 +299,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
   // 1. Change "Agregar Nueva Propiedad" to "Editar Propiedad"
   // 2. Change the submit button text to "Actualizar Propiedad"
   // 3. Update any other text that should be different for editing
-  
+
   return (
     <div
       className="fixed inset-0 bg-black/50 flex items-start justify-center z-50 p-4 overflow-y-auto"
@@ -322,23 +323,23 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
             <X className="h-6 w-6" />
           </button>
         </div>
-        
+
         <div className="p-6">
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
               {error}
             </div>
           )}
-          
+
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Copy all the form fields from AddPropertyModal.tsx */}
             {/* ... */}
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Basic Information */}
               <div className="space-y-4 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
                 <h3 className="text-lg font-medium">Información Básica</h3>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Título *
@@ -455,7 +456,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
               {/* Property Details */}
               <div className="space-y-4 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
                 <h3 className="text-lg font-medium">Detalles de la Propiedad</h3>
-                
+
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -598,7 +599,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
             {/* Image URLs */}
             <div className="space-y-4">
               <h3 className="text-lg font-medium">Imágenes de la Propiedad</h3>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Agregar URL de Imagen
@@ -635,7 +636,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
                       {Object.keys(images).length} {Object.keys(images).length === 1 ? 'imagen' : 'imágenes'}
                     </span>
                   </div>
-                  
+
                   <div className="space-y-3">
                     {Object.entries(images).map(([key, url]) => (
                       <div key={key} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-md">
@@ -667,7 +668,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
                               }}
                               className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
                             />
-                            <label 
+                            <label
                               htmlFor={`cover-${key}`}
                               className="ml-2 block text-sm text-gray-700 cursor-pointer"
                             >
@@ -688,7 +689,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
                       </div>
                     ))}
                   </div>
-                  
+
                   {/* Cover Image Preview */}
                   {formData.cover_image && (
                     <div className="mt-4">
