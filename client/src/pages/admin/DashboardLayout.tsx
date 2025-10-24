@@ -11,7 +11,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
   const handleLogout = async () => {
     await signOut();
-    window.location.href = '/lotesynavesadmin/login';  // Use window.location for logout to clear state
+    window.location.href = '/admin/login';  // Use window.location for logout to clear state
   };
 
   // Helper function to check if a path is active

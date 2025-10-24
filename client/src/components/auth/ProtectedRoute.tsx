@@ -8,7 +8,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
   useEffect(() => {
     if (!loading && !session) {
-      setLocation('/lotesynavesadmin/login');
+      setLocation('/admin/login');
     }
   }, [session, loading, setLocation]);
 
