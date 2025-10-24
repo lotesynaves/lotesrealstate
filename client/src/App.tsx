@@ -20,8 +20,9 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={AboutUs} />
       <AuthProvider>
-        <Route path="/lotesynavesadmin/login" component={Login} />
-        <Route path="/lotesynavesadmin/dashboard" component={AdminRoutes} />
+
+        <Route path="/admin/login" component={Login} />
+        <Route path="/admin/dashboard" component={AdminRoutes} />
       </AuthProvider>
 
       <Route component={NotFound} />
@@ -38,10 +39,10 @@ function App() {
         <TooltipProvider>
           <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
 
-            {!location.startsWith('/lotesynavesadmin/dashboard') && <Header />}
+            {!location.startsWith('/admin/dashboard')  && <Header />}
             <main className="flex-1 relative">
               <Router />
-              {!location.startsWith('/lotesynavesadmin/dashboard') && <FloatingWhatsAppButton />}
+              {!location.startsWith('/admin/dashboard') || location.startsWith('/admin/login') && <FloatingWhatsAppButton />}
             </main>
             <Footer />
             <Toaster />

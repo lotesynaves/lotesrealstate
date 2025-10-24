@@ -48,7 +48,7 @@ export default function PropertyCard({
         />
         <div className="absolute top-3 left-3 flex gap-2">
           <Badge className="bg-primary text-primary-foreground" data-testid={`badge-operation-${operation}`}>
-            {operation === "rent" ? "Renta" : "Venta"}
+            {operation === "renta" ? "Renta" : "Venta"}
           </Badge>
         </div>
         {hasVideos && (

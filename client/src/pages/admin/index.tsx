@@ -10,14 +10,14 @@ const AdminRoutes = () => {
   const [location] = useLocation();
 
   // Handle nested routes for the dashboard
-  if (location.startsWith('/lotesynavesadmin/dashboard')) {
+  if (location.startsWith('/admin/dashboard')) {
     return (
       <AuthProvider>
         <ProtectedRoute>
           <DashboardLayout>
             <Switch>
-              <Route path="/lotesynavesadmin/dashboard" component={PropertiesList} />
-              <Route path="/lotesynavesadmin/dashboard/properties/new" component={NewPropertyForm} />
+              <Route path="/admin/dashboard" component={PropertiesList} />
+              <Route path="/admin/dashboard/properties/new" component={NewPropertyForm} />
               <Route>
                 <div>Not Found</div>
               </Route>
@@ -29,19 +29,19 @@ const AdminRoutes = () => {
   }
 
   // Handle login and other top-level routes
-  if (location === '/lotesynavesadmin') {
-    window.location.href = '/lotesynavesadmin/login';
+  if (location === '/admin') {
+    window.location.href = '/admin/login';
     return null;
   }
 
   return (
     <AuthProvider>
       <Switch>
-        <Route path="/lotesynavesadmin/login" component={Login} />
+        <Route path="/admin/login" component={Login} />
         <Route>
           <div>Redirecting to login...</div>
           <script dangerouslySetInnerHTML={{
-            __html: 'window.location.href = "/lotesynavesadmin/login"',
+            __html: 'window.location.href = "/admin/login"',
           }} />
         </Route>
       </Switch>

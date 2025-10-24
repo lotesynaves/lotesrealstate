@@ -1,4 +1,4 @@
-export type OperationType = 'sale' | 'rent' | 'lease';
+export type OperationType = 'renta' | 'venta' | 'lease';
 
 export interface Property {
   id: string;
@@ -21,6 +21,8 @@ export interface Property {
     dockDoors?: number;
     
     // Additional features
+    buildArea?: number;
+    maintenanceCost?: number;
     bedrooms?: number;
     airConditioning?: boolean;
     frontage?: number;

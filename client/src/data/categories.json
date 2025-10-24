@@ -7,7 +7,7 @@
       "description": "Todas las propiedades disponibles"
     },
     {
-      "key": "naves",
+      "key": "naves industriales",
       "label": "Naves Industriales",
       "icon": "Warehouse",
       "description": "Amplios espacios para operaciones industriales"
@@ -19,7 +19,7 @@
       "description": "Viviendas residenciales"
     },
     {
-      "key": "locales",
+      "key": "locales comerciales",
       "label": "Locales Comerciales",
       "description": "Espacios comerciales en zonas estratégicas",
       "icon": "Store"

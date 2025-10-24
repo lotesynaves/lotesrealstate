@@ -18,7 +18,7 @@ const Login = () => {
     try {
       const { error } = await signIn(email, password);
       if (error) throw error;
-      navigate('/lotesynavesadmin/dashboard');  // This now uses wouter's navigate
+      navigate('/admin/dashboard');  // This now uses wouter's navigate
     } catch (error: any) {
       setError(error.error_description || error.message || 'Error al iniciar sesión');
     } finally {

@@ -48,20 +48,50 @@ const Home = () => {
     return category.toLowerCase().replace(/\s+/g, '');
   };
 
+  console.log("allProperties", allProperties);
+  console.log("searchQuery", searchQuery);
+
   // Filter properties based on search query, category, and operation
+  // Reemplaza la función de filtrado actual con esta versión mejorada
   const filteredProperties = allProperties.filter(property => {
     if (!property) return false;
 
+    // Función para normalizar texto (quitar acentos, espacios y convertir a minúsculas)
+    const normalize = (text: string) => {
+      if (!text) return '';
+      return text
+        .toLowerCase()
+        .trim()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, ' '); // Reemplazar múltiples espacios por uno solo
+    };
+
+    const searchTerm = normalize(searchQuery);
+    const propertyLocation = normalize(property.location || '');
+    const propertyTitle = normalize(property.title || '');
+    const propertyDescription = normalize(property.description || '');
+    const propertyCategory = normalize(property.category || '');
+    const propertyOperation = normalize(property.operation || '');
+
+    // Buscar en título, ubicación y descripción
     const matchesSearch =
-      property.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      property.location.toLowerCase().includes(searchQuery.toLowerCase());
+      searchTerm === '' ||
+      propertyLocation.includes(searchTerm) ||
+      propertyTitle.includes(searchTerm) ||
+      propertyDescription.includes(searchTerm);
+
+    // Depuración
 
     const matchesCategory =
-      selectedCategory === "all" || property.category === selectedCategory;
+      selectedCategory === "all" ||
+      propertyCategory === normalize(selectedCategory) ||
+      propertyCategory === selectedCategory.toLowerCase(); // Agregamos esta línea
 
     const matchesOperation =
-      selectedOperation === "all" || property.operation === selectedOperation;
-
+      selectedOperation === "all" ||
+      propertyOperation === normalize(selectedOperation) ||
+      propertyOperation === selectedOperation.toLowerCase(); // Y esta para operación
     return matchesSearch && matchesCategory && matchesOperation;
   });
 
@@ -79,9 +109,11 @@ const Home = () => {
     land: LandPlot
   };
 
-  const handleCategorySelect = (categoryKey: string) => {
-    setSelectedCategory(categoryKey);
-  };
+ const handleCategorySelect = (categoryKey: string) => {
+  setSelectedCategory(categoryKey === selectedCategory ? "all" : categoryKey);
+  // Also clear the search query when changing categories
+  setSearchQuery("");
+};
 
   // Añadir componentes de íconos a las categorías
   const categories = categoriesList.map(cat => ({
@@ -189,14 +221,14 @@ const Home = () => {
 
           )}
           {/* Contact Section */}
-          <section id="contacto" className="relative py-16 bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800 transition-colors duration-200">
+          <section id="contacto" className="relative w-full py-12  dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800 transition-colors duration-200  md:my-20">
             {/* Background pattern - only visible in dark mode */}
             <div className="absolute inset-0 hidden dark:block">
               <div className="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]"></div>
             </div>
 
-            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="dark:bg-gray-800/70 dark:backdrop-blur-sm dark:rounded-2xl dark:shadow-2xl dark:border dark:border-gray-700/50 dark:overflow-hidden">
+            <div className="relative w-full max-w-7xl mx-auto sm:px-6 lg:px-8">
+              <div className="w-full bg-white dark:bg-gray-800/70 dark:backdrop-blur-sm rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-gray-700/50">
                 <ContactForm />
               </div>
             </div>

@@ -278,7 +278,7 @@ export default function AddPropertyModal({ isOpen, onClose, onSuccess }: AddProp
                       value={formData.category}
                       onChange={handleChange}
                     >
-                      <option value="naves">Naves Industriales</option>
+                      <option value="naves industriales">Naves Industriales</option>
                       <option value="casas">Casas</option>
                       <option value="locales comerciales">Locales Comerciales</option>
                       <option value="oficinas">Oficinas</option>

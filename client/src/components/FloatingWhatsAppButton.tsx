@@ -1,5 +1,4 @@
 import { MessageCircle } from "lucide-react";
-import { useLocation } from 'wouter';
 
 interface FloatingWhatsAppButtonProps {
   className?: string;
@@ -8,17 +7,10 @@ interface FloatingWhatsAppButtonProps {
 export default function FloatingWhatsAppButton({
   className = "",
 }: FloatingWhatsAppButtonProps) {
-  const [_, setLocation] = useLocation();
-
   const handleClick = () => {
-    // Scroll to contact section using the hash
-    setLocation('#contacto');
-    
-    // Also ensure smooth scrolling
-    const contactSection = document.getElementById('contacto');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    const phoneNumber = '524425922245'; // WhatsApp number with country code (Mexico)
+    const message = encodeURIComponent('¡Hola! Me gustaría obtener más información sobre sus propiedades.');
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
 
   return (

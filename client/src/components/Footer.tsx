@@ -1,11 +1,11 @@
-import { Building2, Mail, MapPin, Phone } from "lucide-react";
+import { Building2, Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "wouter";
 
 export default function Footer() {
   return (
-    <footer className="bg-card border-t mt-20">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-card border-t mt-20 w-full">
+      <div className="max-w-7xl mx-auto px-6 py-12 sm:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Building2 className="h-6 w-6 text-primary" />
@@ -17,37 +17,45 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Categorías</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <h3 className="font-semibold mb-4">Redes sociales</h3>
+            <ul className="flex items-center gap-1">
               <li>
-                <Link href="/propiedades?category=naves" className="hover:text-foreground transition-colors" data-testid="link-naves">
-                  Naves Industriales
+                <Link 
+                  href="https://facebook.com" 
+                  className="group flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 transition-all duration-200 hover:bg-[#1877F2] hover:text-white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="link-facebook"
+                >
+                  <Facebook className="h-4 w-4 group-hover:text-white" />
                 </Link>
               </li>
               <li>
-                <Link href="/propiedades?category=casas" className="hover:text-foreground transition-colors" data-testid="link-casas">
-                  Casas
+                <Link 
+                  href="https://instagram.com" 
+                  className="group flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 transition-all duration-200 hover:bg-gradient-to-br hover:from-[#FCAF45] hover:via-[#FF1493] hover:to-[#833AB4] hover:text-white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="link-instagram"
+                >
+                  <Instagram className="h-4 w-4 group-hover:text-white" />
                 </Link>
               </li>
               <li>
-                <Link href="/propiedades?category=locales" className="hover:text-foreground transition-colors" data-testid="link-locales">
-                  Locales Comerciales
-                </Link>
-              </li>
-              <li>
-                <Link href="/propiedades?category=oficinas" className="hover:text-foreground transition-colors" data-testid="link-oficinas">
-                  Oficinas
-                </Link>
-              </li>
-              <li>
-                <Link href="/propiedades?category=terrenos" className="hover:text-foreground transition-colors" data-testid="link-terrenos">
-                  Terrenos
+                <Link 
+                  href="https://linkedin.com" 
+                  className="group flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 transition-all duration-200 hover:bg-[#0A66C2] hover:text-white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="link-linkedin"
+                >
+                  <Linkedin className="h-4 w-4 group-hover:text-white" />
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div>
+          {/* <div>
             <h3 className="font-semibold mb-4">Blog</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
@@ -66,22 +74,22 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           <div>
             <h3 className="font-semibold mb-4">Contacto</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2" data-testid="text-phone">
                 <Phone className="h-4 w-4" />
-                +52 442 123 4567
+                4425922245
               </li>
               <li className="flex items-center gap-2" data-testid="text-email">
                 <Mail className="h-4 w-4" />
-                info@navesindustriales.com
+                propiedades@navesylotesindustriales.com
               </li>
               <li className="flex items-start gap-2" data-testid="text-address">
                 <MapPin className="h-4 w-4 mt-0.5" />
-                <span>Querétaro, México</span>
+                <span>Sierra de Zimapán 4, Villas del Sol, 76046 Santiago de Querétaro, Qro.</span>
               </li>
             </ul>
           </div>

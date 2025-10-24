@@ -62,87 +62,50 @@ export default function SearchBar({ onSearch, onClearFilters, className = '' }: 
   const hasFilters = searchParams.location || searchParams.category || searchParams.operation;
 
   return (
-    <div className={`bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 transition-colors duration-200 ${className}`}>
-      <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100">Buscar Propiedades</h3>
-      <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          <div className="md:col-span-2 relative">
-            <div className="relative">
-              <Input
-                name="location"
-                placeholder="Ubicación..."
-                className="w-full pr-10 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-400"
-                value={searchParams.location}
-                onChange={handleInputChange}
-                data-testid="input-location"
-              />
-              {searchParams.location && (
-                <button
-                  type="button"
-                  onClick={handleClearInput}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                  aria-label="Limpiar búsqueda"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              )}
-            </div>
-          </div>
-          <div>
-            <Select
-              value={searchParams.category}
-              onValueChange={(value) => handleSelectChange('category', value)}
+   // Update the main container classes
+<div className={`bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 transition-colors duration-200 w-full max-w-4xl mx-auto ${className}`}>
+  <h3 className="text-xl font-semibold mb-6 text-center text-gray-800 dark:text-gray-100">
+    Buscar Propiedades
+  </h3>
+  <form onSubmit={handleSubmit} className="w-full">
+    <div className="flex flex-col items-center w-full">
+      {/* Search input container */}
+      <div className="w-full max-w-2xl">
+        <div className="relative">
+          <Input
+            name="location"
+            placeholder="Ubicación..."
+            className="w-full pr-10 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-400"
+            value={searchParams.location}
+            onChange={handleInputChange}
+            data-testid="input-location"
+          />
+          {searchParams.location && (
+            <button
+              type="button"
+              onClick={handleClearInput}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+              aria-label="Limpiar búsqueda"
             >
-              <SelectTrigger className="w-full bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100" data-testid="select-category">
-                <SelectValue placeholder="Categoría" />
-              </SelectTrigger>
-              <SelectContent className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600">
-                <SelectItem value="Naves Industriales">Naves Industriales</SelectItem>
-                <SelectItem value="Casas">Casas</SelectItem>
-                <SelectItem value="Locales Comerciales">Locales Comerciales</SelectItem>
-                <SelectItem value="Oficinas">Oficinas</SelectItem>
-                <SelectItem value="Terrenos">Terrenos</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div>
-            <Select
-              value={searchParams.operation}
-              onValueChange={(value) => handleSelectChange('operation', value)}
-            >
-              <SelectTrigger className="w-full bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100" data-testid="select-operation">
-                <SelectValue placeholder="Operación" />
-              </SelectTrigger>
-              <SelectContent className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600">
-                <SelectItem value="venta">Venta</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex gap-2">
-            <Button
-              type="submit"
-              className="flex-1 md:flex-none bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 text-white"
-              data-testid="button-submit-search"
-            >
-              <Search className="h-4 w-4 mr-2" />
-              Buscar
-            </Button>
-            {hasFilters && (
-              <Button
-                type="button"
-                variant="outline"
-                onClick={handleClearAll}
-                className="flex-1 md:flex-none border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700"
-                data-testid="button-clear-filters"
-              >
-                <X className="h-4 w-4 mr-2" />
-                Limpiar
-              </Button>
-            )}
-
-          </div>
+              <X className="h-4 w-4" />
+            </button>
+          )}
         </div>
-      </form>
+      </div>
+      
+      {/* Button container */}
+      <div className="mt-4 w-full max-w-xs">
+        <Button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 text-white"
+          data-testid="button-submit-search"
+        >
+          <Search className="h-4 w-4 mr-2" />
+          Buscar
+        </Button>
+      </div>
     </div>
+  </form>
+</div>
   );
 }
