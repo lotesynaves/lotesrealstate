@@ -18,40 +18,40 @@ export default function Footer() {
 
           <div>
             <h3 className="font-semibold mb-4">Redes sociales</h3>
-            <ul className="flex items-center gap-1">
+            <ul className="flex items-center gap-2">
+              {/* Facebook */}
               <li>
-                <Link 
-                  href="https://facebook.com" 
-                  className="group flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 transition-all duration-200 hover:bg-[#1877F2] hover:text-white"
+                <a 
+                  href="https://www.facebook.com/profile.php?id=100067433295640" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-testid="link-facebook"
+                  className="group flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 dark:bg-gray-800 transition-all duration-300 hover:bg-[#1877F2] hover:shadow-lg hover:shadow-[#1877F2]/20"
                 >
-                  <Facebook className="h-4 w-4 group-hover:text-white" />
-                </Link>
+                  <Facebook className="h-4 w-4 text-gray-600 dark:text-gray-300 group-hover:text-white transition-colors" />
+                </a>
               </li>
+
+              {/* Instagram */}
               <li>
-                <Link 
-                  href="https://instagram.com" 
-                  className="group flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 transition-all duration-200 hover:bg-gradient-to-br hover:from-[#FCAF45] hover:via-[#FF1493] hover:to-[#833AB4] hover:text-white"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-testid="link-instagram"
+
+                <a href="https://www.instagram.com/navesylotes?igsh=eTVjMHpyNzVyNnNr" className="group flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 transition-all duration-200 hover:bg-gradient-to-br hover:from-[#FCAF45] hover:via-[#FF1493] hover:to-[#833AB4] hover:text-white"
                 >
                   <Instagram className="h-4 w-4 group-hover:text-white" />
-                </Link>
+                </a>
               </li>
+
+              {/* LinkedIn */}
               <li>
-                <Link 
-                  href="https://linkedin.com" 
-                  className="group flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 transition-all duration-200 hover:bg-[#0A66C2] hover:text-white"
+                <a 
+                  href="https://www.linkedin.com/in/violeta-cortes" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-testid="link-linkedin"
+                  className="group flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 dark:bg-gray-800 transition-all duration-300 hover:bg-[#0A66C2] hover:shadow-lg hover:shadow-[#0A66C2]/20"
                 >
-                  <Linkedin className="h-4 w-4 group-hover:text-white" />
-                </Link>
+                  <Linkedin className="h-4 w-4 text-gray-600 dark:text-gray-300 group-hover:text-white transition-colors" />
+                </a>
               </li>
+
             </ul>
           </div>
 

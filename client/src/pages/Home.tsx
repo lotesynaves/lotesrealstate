@@ -48,8 +48,8 @@ const Home = () => {
     return category.toLowerCase().replace(/\s+/g, '');
   };
 
-  console.log("allProperties", allProperties);
-  console.log("searchQuery", searchQuery);
+  // console.log("allProperties", allProperties);
+  // console.log("searchQuery", searchQuery);
 
   // Filter properties based on search query, category, and operation
   // Reemplaza la función de filtrado actual con esta versión mejorada

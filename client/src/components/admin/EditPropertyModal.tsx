@@ -57,7 +57,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
 
           propertyAssets = assetsData || null;
         }
-        console.log("propertyAssets data: fdsfd", propertyAssets)
+        // console.log("propertyAssets data: fdsfd", propertyAssets)
         // Set form data from property
         setFormData(prev => ({
           ...prev,

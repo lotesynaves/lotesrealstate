@@ -10,7 +10,7 @@ export const useProperties = () => {
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                console.log('Iniciando consulta a Supabase...');
+                // console.log('Iniciando consulta a Supabase...');
                 setLoading(true);
                 
                 // 1. Verificar que supabase esté inicializado correctamente
@@ -19,7 +19,7 @@ export const useProperties = () => {
                 }
 
                 // 2. Hacer la consulta con más información de depuración
-                console.log('Consultando tabla "properties"...');
+                // console.log('Consultando tabla "properties"...');
                 // First, get the properties
                 const { data: propertiesData, error: propertiesError } = await supabase
                     .from('properties')
@@ -35,7 +35,7 @@ export const useProperties = () => {
                 const { data: assetsData, error: assetsError } = await supabase
                     .from('properties_assets')
                     .select('propertie_id, cover_image, images');
-                console.log('Assets data:', assetsData);
+                // console.log('Assets data:', assetsData);
                 if (assetsError) {
                     console.error('Error fetching properties_assets:', assetsError);
                     throw assetsError;
@@ -47,7 +47,7 @@ export const useProperties = () => {
                     properties_assets: [assetsData.find(asset => asset.propertie_id === prop.propertie_id)].filter(Boolean) || []
                 }));
 
-                console.log('Datos de propiedades cargados:', { propertiesCount: data.length });
+                // console.log('Datos de propiedades cargados:', { propertiesCount: data.length });
 
                 if (!data || data.length === 0) {
                     console.warn('La consulta no devolvió resultados. Verifica que la tabla "properties" tenga datos.');
@@ -59,7 +59,7 @@ export const useProperties = () => {
                 // 3. Mapear los datos con mejor manejo de errores
                 const typedProperties: Property[] = data.map((prop: any) => {
                     try {
-                        console.log('Procesando propiedad:', prop);
+                        // console.log('Procesando propiedad:', prop);
                         // Get the cover image
                         const coverImage = prop.properties_assets?.[0]?.cover_image || prop.coverImage || '';
                         
@@ -85,7 +85,7 @@ export const useProperties = () => {
                                     );
                                 }
                                 
-                                console.log('Processed images:', images);
+                                // console.log('Processed images:', images);
                             } catch (e) {
                                 console.error('Error processing images data:', e, 'Raw data:', imagesData);
                             }
@@ -126,7 +126,7 @@ export const useProperties = () => {
                     }
                 }).filter(Boolean) as Property[]; // Filtrar cualquier null del mapeo
 
-                console.log('Propiedades mapeadas:', typedProperties);
+                // console.log('Propiedades mapeadas:', typedProperties);
                 setProperties(typedProperties);
                 
             } catch (err) {

@@ -93,7 +93,7 @@ const PropertiesList = () => {
         const propertyAssets = assets?.filter(asset => asset.propertie_id === property.propertie_id) || [];
         
         // Debug log
-        console.log('Property:', property.propertie_id, 'Assets:', propertyAssets);
+        // console.log('Property:', property.propertie_id, 'Assets:', propertyAssets);
         
         return {
           ...property,
@@ -197,13 +197,13 @@ const PropertiesList = () => {
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 sm:pl-6">
                         {(() => {
                           // Debug log
-                          console.log('Property assets:', {
-                            id: property.propertie_id,
-                            hasAssets: !!property.properties_assets,
-                            assets: property.properties_assets,
-                            firstAsset: property.properties_assets?.[0],
-                            coverImage: property.properties_assets?.[0]?.cover_image
-                          });
+                          // console.log('Property assets:', {
+                          //   id: property.propertie_id,
+                          //   hasAssets: !!property.properties_assets,
+                          //   assets: property.properties_assets,
+                          //   firstAsset: property.properties_assets?.[0],
+                          //   coverImage: property.properties_assets?.[0]?.cover_image
+                          // });
                           
                           const imageUrl = property.properties_assets?.[0]?.cover_image;
                           

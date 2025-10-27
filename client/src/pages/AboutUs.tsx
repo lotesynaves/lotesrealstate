@@ -116,94 +116,227 @@ export default function AboutUs() {
         </div>
       </div>
 
-      {/* Sección de Información */}
+      {/* Sección Quiénes Somos */}
       <section className="relative py-16 bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800">
-        {/* Background pattern - only visible in dark mode */}
         <div className="absolute inset-0 hidden dark:block">
           <div className="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]"></div>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white dark:bg-gray-800/70 dark:backdrop-blur-sm dark:rounded-2xl dark:shadow-2xl dark:border dark:border-gray-700/50 dark:overflow-hidden p-8 md:p-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-              {/* Imagen */}
-              <div className="relative h-full min-h-[24rem] rounded-xl overflow-hidden shadow-xl transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+          <div className="text-center mb-12">
+            <span className="text-blue-600 dark:text-blue-400 font-semibold text-lg">Nuestra Empresa</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mt-2">
+              Líderes en Bienes Raíces Industriales
+            </h2>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800/70 dark:backdrop-blur-sm dark:rounded-2xl dark:shadow-2xl dark:border dark:border-gray-700/50 p-8 md:p-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                  En Naves y Lotes Industriales, apoyamos el crecimiento de empresas nacionales y extranjeras mediante soluciones inmobiliarias industriales y comerciales que responden a las exigencias del mercado global.
+                </p>
+                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                  Nuestra visión es contribuir al desarrollo económico y comunitario de México, generando empleos, conocimiento y relaciones de largo plazo que impulsan la competitividad y crean ecosistemas empresariales sólidos en Querétaro, el corazón industrial del Bajío.
+                </p>
+                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                  Estamos presentes en los principales centros industriales de Querétaro, lo que nos permite posicionar a cada cliente dentro de los mejores corredores logísticos y zonas estratégicas del país.
+                </p>
+              </div>
+
+              <div className="relative h-80 md:h-96 rounded-xl overflow-hidden shadow-xl">
                 <img
                   src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
                   alt="Nuestro Equipo"
                   className="w-full h-full object-cover"
                 />
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              {/* Texto */}
-              <div className="space-y-6 flex flex-col h-full justify-center">
-                <div>
-                  <span className="text-blue-600 dark:text-blue-400 font-semibold text-lg">Quiénes Somos</span>
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                    Líderes en Bienes Raíces Industriales
-                  </h2>
-                </div>
-                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                  En Industrial Realty Hub nos especializamos en ofrecer soluciones integrales en bienes raíces industriales, conectando a compradores y vendedores en el mercado industrial con un enfoque profesional y personalizado.
-                </p>
+      {/* Sección de Soluciones */}
+      <section className="py-16 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+              Nuestras Soluciones
+            </h2>
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Soluciones inmobiliarias estratégicas para el crecimiento de su negocio
+            </p>
+          </div>
 
-                <div className="space-y-4 pt-2">
-                  <div className="flex items-start space-x-4 max-w-lg group">
-                    <div className="flex-shrink-0 mt-1">
-                      <div className="flex items-center justify-center h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors duration-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-white">Más de 10 años de experiencia</h3>
-                      <p className="text-gray-600 dark:text-gray-300">Líderes en el mercado de bienes raíces industriales con una trayectoria comprobada.</p>
-                    </div>
-                  </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Naves de Inventario</h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Naves de inventario (shell buildings) disponibles para ocupación inmediata, construidas con altos estándares y ubicadas en regiones clave de Querétaro.
+              </p>
+              <ul className="mt-4 space-y-2 text-gray-600 dark:text-gray-300">
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Disponibilidad inmediata</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Ubicaciones estratégicas</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Altos estándares de construcción</span>
+                </li>
+              </ul>
+            </div>
 
-                  <div className="flex items-start space-x-4 max-w-lg group">
-                    <div className="flex-shrink-0 mt-1">
-                      <div className="flex items-center justify-center h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors duration-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-white">Amplio portafolio de propiedades</h3>
-                      <p className="text-gray-600 dark:text-gray-300">Contamos con las mejores opciones para cubrir tus necesidades industriales.</p>
-                    </div>
-                  </div>
+            <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Proyectos a Medida</h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Proyectos "build-to-suit" totalmente personalizados según los requerimientos operativos y financieros de su empresa.
+              </p>
+              <ul className="mt-4 space-y-2 text-gray-600 dark:text-gray-300">
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Diseño personalizado</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Proceso integral</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Adaptado a sus necesidades</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                  <div className="flex items-start space-x-4 max-w-lg group">
-                    <div className="flex-shrink-0 mt-1">
-                      <div className="flex items-center justify-center h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/70 transition-colors duration-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-white">Asesoría personalizada</h3>
-                      <p className="text-gray-600 dark:text-gray-300">Nuestros expertos te guiarán en cada paso del proceso.</p>
-                    </div>
-                  </div>
-                </div>
+      {/* Sección Misión, Visión y Valores */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-blue-600 dark:text-blue-400 text-sm font-medium tracking-wider">NUESTROS PRINCIPIOS</span>
+            <h2 className="mt-2 text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+              Misión, Visión y Valores
+            </h2>
+          </div>
 
-
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Misión */}
+            <div className="bg-white dark:bg-gray-800/70 p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700/50">
+              <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-6">
+                <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
               </div>
-            </div> </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Misión</h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Promover la competitividad de México y Querétaro ofreciendo a empresas extranjeras el entorno y las soluciones inmobiliarias ideales para su éxito.
+              </p>
+            </div>
+
+            {/* Visión */}
+            <div className="bg-white dark:bg-gray-800/70 p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700/50">
+              <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-6">
+                <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Visión</h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Ser la puerta de entrada preferida por corporativos internacionales para sus operaciones industriales y comerciales en México, contribuyendo al desarrollo económico de la región.
+              </p>
+            </div>
+
+            {/* Valores */}
+            <div className="bg-white dark:bg-gray-800/70 p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700/50">
+              <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-6">
+                <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Valores</h3>
+              <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Transparencia en todas nuestras operaciones</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Innovación en soluciones inmobiliarias</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Compromiso con el éxito de nuestros clientes</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Profesionalismo en cada interacción</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Experiencia internacional al servicio local</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sección de Testimonios */}
+      <section className="py-16 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-blue-600 dark:text-blue-400 text-sm font-medium tracking-wider">TESTIMONIOS</span>
+            <h2 className="mt-2 text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+              Lo que dicen nuestros clientes
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {testimonials.map((testimonial) => (
+              <TestimonialCard
+                key={testimonial.id}
+                clientImage={testimonial.clientImage}
+                propertyImage={testimonial.propertyImage}
+                name={testimonial.clientName}
+                role={testimonial.role}
+                comment={testimonial.comment}
+                rating={testimonial.rating}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Sección de Asesores */}
       <section className="relative py-16 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800/50 transition-colors duration-300">
-        {/* Background pattern - only visible in dark mode */}
-        <div className="absolute inset-0 hidden dark:block">
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/90 to-gray-900/70 [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]"></div>
-        </div>
-
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-sm font-medium text-blue-600 dark:text-blue-400 tracking-wider">EQUIPO</span>
@@ -225,12 +358,15 @@ export default function AboutUs() {
         </div>
       </section>
 
+
+
+
       {/* Testimonials Section */}
-      <section className="relative py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
+      < section className="relative py-20 bg-white dark:bg-gray-800 transition-colors duration-300" >
         {/* Background pattern - only visible in dark mode */}
-        <div className="absolute inset-0 hidden dark:block">
+        < div className="absolute inset-0 hidden dark:block" >
           <div className="absolute inset-0 bg-gradient-to-b from-gray-900/70 via-gray-900/80 to-gray-900/90 [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]"></div>
-        </div>
+        </div >
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -259,10 +395,10 @@ export default function AboutUs() {
 
 
         </div>
-      </section>
+      </section >
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-blue-700 to-blue-800 text-white py-16">
+      < section className="bg-gradient-to-r from-blue-700 to-blue-800 text-white py-16" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">¿Listo para encontrar tu próxima propiedad industrial?</h2>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
@@ -289,7 +425,7 @@ export default function AboutUs() {
             </a>
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }

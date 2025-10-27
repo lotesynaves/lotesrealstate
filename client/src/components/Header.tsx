@@ -49,19 +49,7 @@ export default function Header() {
           </nav>
           
           <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 hidden md:block"></div>
-                    <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400"
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {theme === 'dark' ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
-            </Button>
+                 
 
           <div className="flex items-center gap-2 md:hidden">
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
