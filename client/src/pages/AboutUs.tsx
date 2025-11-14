@@ -310,7 +310,7 @@ export default function AboutUs() {
       </section>
 
       {/* Sección de Testimonios */}
-      <section className="py-16 bg-white dark:bg-gray-900">
+      {/* <section className="py-16 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-blue-600 dark:text-blue-400 text-sm font-medium tracking-wider">TESTIMONIOS</span>
@@ -333,10 +333,10 @@ export default function AboutUs() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Sección de Asesores */}
-      <section className="relative py-16 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800/50 transition-colors duration-300">
+      {/* <section className="relative py-16 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800/50 transition-colors duration-300">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-sm font-medium text-blue-600 dark:text-blue-400 tracking-wider">EQUIPO</span>
@@ -357,14 +357,14 @@ export default function AboutUs() {
           </div>
         </div>
       </section>
-
+ */}
 
 
 
       {/* Testimonials Section */}
-      < section className="relative py-20 bg-white dark:bg-gray-800 transition-colors duration-300" >
-        {/* Background pattern - only visible in dark mode */}
-        < div className="absolute inset-0 hidden dark:block" >
+      {/* < section className="relative py-20 bg-white dark:bg-gray-800 transition-colors duration-300" > */}
+      {/* Background pattern - only visible in dark mode */}
+      {/* < div className="absolute inset-0 hidden dark:block" >
           <div className="absolute inset-0 bg-gradient-to-b from-gray-900/70 via-gray-900/80 to-gray-900/90 [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]"></div>
         </div >
 
@@ -395,7 +395,7 @@ export default function AboutUs() {
 
 
         </div>
-      </section >
+      </section > */}
 
       {/* CTA Section */}
       < section className="bg-gradient-to-r from-blue-700 to-blue-800 text-white py-16" >
