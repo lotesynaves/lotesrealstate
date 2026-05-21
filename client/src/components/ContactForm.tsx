@@ -18,7 +18,7 @@ interface ContactFormData {
   propertyRef?: string;
 }
 
-const WHATSAPP_NUMBER = "+524425922245"; // WhatsApp number for contact
+const WHATSAPP_NUMBER = "+524424613233"; // WhatsApp number for contact
 
 export default function ContactForm({ propertyRef, onSubmit }: ContactFormProps) {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -71,7 +71,7 @@ export default function ContactForm({ propertyRef, onSubmit }: ContactFormProps)
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="font-medium text-base sm:text-lg text-gray-900 dark:text-gray-100">Llámanos</h3>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-0.5">442 592 2245</p>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-0.5">442 461 3233</p>
             </div>
           </div>
           
@@ -81,7 +81,7 @@ export default function ContactForm({ propertyRef, onSubmit }: ContactFormProps)
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="font-medium text-base sm:text-lg text-gray-900 dark:text-gray-100">WhatsApp</h3>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-0.5">442 592 2245</p>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-0.5">442 461 3233</p>
             </div>
           </div>
           

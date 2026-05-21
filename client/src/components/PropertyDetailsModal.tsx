@@ -99,7 +99,7 @@ export default function PropertyDetailsModal({ property, onClose }: PropertyDeta
     currentUrl.searchParams.set('propertyId', property.id);
 
     const message = `¡Hola! Estoy interesad@ en la propiedad "${property.title}".\n\n${currentUrl.toString()}`;
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/524424613233?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
@@ -348,7 +348,7 @@ export default function PropertyDetailsModal({ property, onClose }: PropertyDeta
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                         </svg>
-                        442 592 2245
+                        442 461 3233
                       </p>
                     </div>
                   </div>

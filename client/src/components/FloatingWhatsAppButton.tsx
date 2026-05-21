@@ -8,7 +8,7 @@ export default function FloatingWhatsAppButton({
   className = "",
 }: FloatingWhatsAppButtonProps) {
   const handleClick = () => {
-    const phoneNumber = '524425922245'; // WhatsApp number with country code (Mexico)
+    const phoneNumber = '524424613233'; // WhatsApp number with country code (Mexico)
     const message = encodeURIComponent('¡Hola! Me gustaría obtener más información sobre sus propiedades.');
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
