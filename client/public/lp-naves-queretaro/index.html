@@ -388,19 +388,47 @@
         });
       });
 
-      // form_submit_lead al enviar el formulario (Netlify maneja el POST)
+      // Envío del formulario vía AJAX a Netlify Forms.
+      // Evita el POST de página completa (que con el rewrite catch-all del SPA
+      // devuelve un 404 de Netlify) y muestra el éxito sin navegar.
       var form = document.getElementById('lead-form');
+      var ok = document.getElementById('form-success');
+      function showSuccess() {
+        if (form) form.style.display = 'none';
+        if (ok) ok.style.display = 'block';
+      }
       if (form) {
-        form.addEventListener('submit', function () {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+
           var tipo = (form.querySelector('[name="tipo_de_nave"]') || {}).value || '';
           window.dataLayer.push({ event: 'form_submit_lead', lead_tipo_nave: tipo });
+
+          var btn = form.querySelector('button[type="submit"]');
+          var btnText = btn ? btn.textContent : '';
+          if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
+
+          var body = new URLSearchParams(new FormData(form)).toString();
+          fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: body
+          })
+          .then(function (res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            showSuccess();
+            try { history.replaceState(null, '', location.pathname + '?ok=1#form-lead'); } catch (err) {}
+          })
+          .catch(function () {
+            if (btn) { btn.disabled = false; btn.textContent = btnText; }
+            alert('Hubo un problema al enviar. Inténtalo de nuevo o escríbenos por WhatsApp.');
+          });
         });
       }
 
-      // Mensaje de éxito al volver de Netlify (?ok=1)
+      // Mensaje de éxito al volver de Netlify (?ok=1) — respaldo sin JS de fetch
       if (new URLSearchParams(location.search).get('ok') === '1') {
-        var ok = document.getElementById('form-success');
-        if (form && ok) { form.style.display = 'none'; ok.style.display = 'block'; }
+        showSuccess();
       }
     </script>
   </body>
