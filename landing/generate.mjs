@@ -28,6 +28,41 @@ const waHref = `https://wa.me/${c.contact.whatsappNumber}?text=${encodeURICompon
 )}`;
 const telHref = `tel:+52${c.contact.phoneRaw}`;
 
+// Endpoint REST de Supabase para insertar leads. La anon key es pública por
+// diseño (protegida por RLS: solo INSERT, sin SELECT). Si no hay config de
+// Supabase, no se emite el bloque de insert y la landing sigue igual.
+const sb = c.supabase || {};
+const sbTable = sb.table || "leads";
+const sbEndpoint = sb.url
+  ? `${sb.url.replace(/\/+$/, "")}/rest/v1/${sbTable}`
+  : "";
+
+// Bloque JS (fire-and-forget) que guarda el lead en Supabase además de Netlify.
+// Se ejecuta en paralelo: un fallo aquí NO bloquea el envío a Netlify ni el
+// mensaje de éxito. Usa Prefer: return=minimal para no requerir política SELECT.
+const supabaseInsertJs = sbEndpoint
+  ? `
+          // Guardar el lead también en Supabase (tabla "${sbTable}").
+          try {
+            var sbData = new FormData(form);
+            fetch(${JSON.stringify(sbEndpoint)}, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'apikey': ${JSON.stringify(sb.anonKey || "")},
+                'Authorization': 'Bearer ' + ${JSON.stringify(sb.anonKey || "")},
+                'Prefer': 'return=minimal'
+              },
+              body: JSON.stringify({
+                nombre: sbData.get('nombre') || '',
+                telefono: sbData.get('telefono') || '',
+                tipo_de_nave: sbData.get('tipo_de_nave') || ''
+              })
+            }).catch(function (err) { console.error('Supabase lead insert failed', err); });
+          } catch (err) { console.error('Supabase lead insert error', err); }
+`
+  : "";
+
 // Icono WhatsApp reutilizable
 const waIcon = `<svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.8.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-4.9 1 1-4.8-.3-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10.1-9.9 10.1zm5.5-7.4c-.3-.2-1.8-.9-2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1c-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2.9 1.2 2.9.8 3.5.8.5 0 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/></svg>`;
 
@@ -440,7 +475,7 @@ const html = `<!DOCTYPE html>
 
           var tipo = (form.querySelector('[name="tipo_de_nave"]') || {}).value || '';
           window.dataLayer.push({ event: 'form_submit_lead', lead_tipo_nave: tipo });
-
+${supabaseInsertJs}
           var btn = form.querySelector('button[type="submit"]');
           var btnText = btn ? btn.textContent : '';
           if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }

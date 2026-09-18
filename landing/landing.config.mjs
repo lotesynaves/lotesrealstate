@@ -40,6 +40,19 @@ export const config = {
   // --- Netlify Forms --------------------------------------------------------
   formName: "leads-naves-queretaro",
 
+  // --- Supabase -------------------------------------------------------------
+  //  Mismo proyecto de Supabase que ya usa el sitio (ver client/.env y
+  //  client/src/lib/supabase.ts). La `anonKey` es PÚBLICA por diseño: ya viaja
+  //  en el bundle del sitio y en el navegador de cada visitante; lo que protege
+  //  los datos es el RLS de la tabla (solo INSERT, sin SELECT público).
+  //  NUNCA pongas aquí la service_role key.
+  supabase: {
+    url: "https://nhyhilbvpcttjllunxhm.supabase.co",
+    anonKey:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5oeWhpbGJ2cGN0dGpsbHVueGhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTEzNjIsImV4cCI6MjA3NjcyNzM2Mn0.mkP-Uqcjma92N2mp5vTIVh1F0gouBhuJEAWrKLiZy1w",
+    table: "leads",
+  },
+
   // --- HERO / above the fold -----------------------------------------------
   hero: {
     // Imagen de fondo del hero (optimizada, misma estética que la home).

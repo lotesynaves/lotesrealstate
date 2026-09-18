@@ -404,6 +404,25 @@
           var tipo = (form.querySelector('[name="tipo_de_nave"]') || {}).value || '';
           window.dataLayer.push({ event: 'form_submit_lead', lead_tipo_nave: tipo });
 
+          // Guardar el lead también en Supabase (tabla "leads").
+          try {
+            var sbData = new FormData(form);
+            fetch("https://nhyhilbvpcttjllunxhm.supabase.co/rest/v1/leads", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'apikey': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5oeWhpbGJ2cGN0dGpsbHVueGhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTEzNjIsImV4cCI6MjA3NjcyNzM2Mn0.mkP-Uqcjma92N2mp5vTIVh1F0gouBhuJEAWrKLiZy1w",
+                'Authorization': 'Bearer ' + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5oeWhpbGJ2cGN0dGpsbHVueGhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTEzNjIsImV4cCI6MjA3NjcyNzM2Mn0.mkP-Uqcjma92N2mp5vTIVh1F0gouBhuJEAWrKLiZy1w",
+                'Prefer': 'return=minimal'
+              },
+              body: JSON.stringify({
+                nombre: sbData.get('nombre') || '',
+                telefono: sbData.get('telefono') || '',
+                tipo_de_nave: sbData.get('tipo_de_nave') || ''
+              })
+            }).catch(function (err) { console.error('Supabase lead insert failed', err); });
+          } catch (err) { console.error('Supabase lead insert error', err); }
+
           var btn = form.querySelector('button[type="submit"]');
           var btnText = btn ? btn.textContent : '';
           if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
