@@ -1,4 +1,4 @@
-import { Building2, Menu, Moon, Sun } from "lucide-react";
+import { Menu, Moon, Sun } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,9 +25,12 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 dark:bg-gray-900/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-gray-200 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group" data-testid="link-home">
-          <Building2 className="h-6 w-6 text-blue-600 dark:text-blue-400 transition-colors duration-200 group-hover:text-blue-700 dark:group-hover:text-blue-300" />
-          <span className="text-xl font-bold hidden sm:inline text-gray-900 dark:text-white">NavesIndustriales</span>
+        <Link href="/" className="flex items-center group" data-testid="link-home">
+          <img
+            src="/logo-arde.png"
+            alt="ARDE Properties"
+            className="h-12 w-auto dark:invert transition-opacity duration-200 group-hover:opacity-90"
+          />
         </Link>
 
         <div className="flex items-center gap-6">
