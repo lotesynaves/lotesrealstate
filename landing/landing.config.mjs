@@ -57,7 +57,7 @@ export const config = {
   hero: {
     // Imagen de fondo del hero (optimizada, misma estética que la home).
     // Ruta absoluta desde la raíz del sitio.
-    image: "/lp-naves-queretaro/hero.jpg",
+    image: "/lp-naves-queretaro/hero.webp",
     imageAlt: "Interior de nave industrial en Querétaro",
     // Toque en chino (eyebrow discreto sobre el H1). Deja "" para ocultarlo.
     zh: "工业地产专家", // "expertos en bienes raíces industriales"
