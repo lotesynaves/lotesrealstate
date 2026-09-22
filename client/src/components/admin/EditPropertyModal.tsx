@@ -1,8 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Button } from '../ui/button';
 import { X } from 'lucide-react';
 import { Property } from '../../../../shared/types';
+import {
+  uploadPropertyImage,
+  deleteBucketImageByUrl,
+  isBucketUrl,
+  nextImageKey,
+  formatBytes,
+  MAX_IMAGES,
+  type UploadResult,
+} from '@/lib/uploadImage';
 
 interface EditPropertyModalProps {
   isOpen: boolean;
@@ -16,6 +25,31 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
   const [error, setError] = useState('');
   const [images, setImages] = useState<{ [key: string]: string }>({});
   const [newImageUrl, setNewImageUrl] = useState('');
+  const [uploading, setUploading] = useState(false);
+  // Archivos subidos en esta sesión que aún NO se guardaron con "Guardar".
+  // Si el admin cancela/cierra, se borran del bucket para no dejar basura.
+  const [uploadedUrls, setUploadedUrls] = useState<string[]>([]);
+  // Peso antes/después de comprimir, para mostrarlo en pantalla.
+  const [sizeReport, setSizeReport] = useState<
+    { url: string; name: string; before: number; after: number }[]
+  >([]);
+
+  // Espejo de uploadedUrls en un ref para poder leerlo en el cleanup de
+  // desmontaje sin closure obsoleto.
+  const uploadedUrlsRef = useRef<string[]>([]);
+  useEffect(() => {
+    uploadedUrlsRef.current = uploadedUrls;
+  }, [uploadedUrls]);
+
+  // Limpieza al DESMONTAR el componente (p. ej. navegar fuera del panel con
+  // imágenes subidas sin guardar). El cierre normal del modal no desmonta
+  // —el padre siempre lo renderiza— así que ese caso lo cubre handleClose.
+  useEffect(() => {
+    return () => {
+      uploadedUrlsRef.current.forEach(url => deleteBucketImageByUrl(url));
+    };
+  }, []);
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -105,7 +139,11 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
 
   const addImage = () => {
     if (newImageUrl.trim()) {
-      const newKey = (Object.keys(images).length + 1).toString();
+      if (Object.keys(images).length >= MAX_IMAGES) {
+        setError(`Máximo ${MAX_IMAGES} imágenes por propiedad.`);
+        return;
+      }
+      const newKey = nextImageKey(images);
       const updatedImages = {
         ...images,
         [newKey]: newImageUrl.trim()
@@ -123,6 +161,49 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
 
       setNewImageUrl('');
     }
+  };
+
+  // Subida de archivos desde la computadora (comprime + sube al bucket).
+  const handleFilesSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    e.target.value = ''; // permite volver a elegir el mismo archivo
+    if (files.length === 0) return;
+
+    if (Object.keys(images).length + files.length > MAX_IMAGES) {
+      setError(
+        `Máximo ${MAX_IMAGES} imágenes por propiedad. Ya tienes ${Object.keys(images).length}.`,
+      );
+      return;
+    }
+
+    const folder = property ? String(property.propertie_id) : `nuevo-${crypto.randomUUID()}`;
+    setUploading(true);
+    setError('');
+
+    const current = { ...images };
+    const newUrls: string[] = [];
+    const reports: { url: string; name: string; before: number; after: number }[] = [];
+    const errors: string[] = [];
+
+    for (const file of files) {
+      try {
+        const r: UploadResult = await uploadPropertyImage(file, folder);
+        current[nextImageKey(current)] = r.url;
+        newUrls.push(r.url);
+        reports.push({ url: r.url, name: file.name, before: r.originalSize, after: r.compressedSize });
+      } catch (err: any) {
+        errors.push(err.message || `No se pudo subir «${file.name}».`);
+      }
+    }
+
+    setImages(current);
+    setUploadedUrls(prev => [...prev, ...newUrls]);
+    setSizeReport(prev => [...prev, ...reports]);
+    if (!formData.cover_image && newUrls[0]) {
+      setFormData(prev => ({ ...prev, cover_image: newUrls[0] }));
+    }
+    if (errors.length) setError(errors.join(' '));
+    setUploading(false);
   };
 
   const removeImage = async (key: string) => {
@@ -190,6 +271,24 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
         cover_image: ''
       }));
     }
+
+    // La referencia ya se quitó de la BD arriba: si el archivo vive en nuestro
+    // bucket, bórralo también para no dejar huérfanos (URLs externas no se tocan).
+    if (isBucketUrl(imageUrl)) {
+      deleteBucketImageByUrl(imageUrl);
+    }
+    setUploadedUrls(prev => prev.filter(u => u !== imageUrl));
+    setSizeReport(prev => prev.filter(r => r.url !== imageUrl));
+  };
+
+  // Cierre/cancelación: borra del bucket los archivos subidos que no se guardaron.
+  const handleClose = () => {
+    if (uploadedUrls.length) {
+      uploadedUrls.forEach(url => deleteBucketImageByUrl(url));
+      setUploadedUrls([]);
+      setSizeReport([]);
+    }
+    onClose();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -276,6 +375,8 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
         }
       }
 
+      // Guardado con éxito: los archivos subidos ya son permanentes.
+      setUploadedUrls([]);
       onSuccess();
       onClose();
     } catch (err: any) {
@@ -288,7 +389,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
 
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
-      onClose();
+      handleClose();
     }
   };
 
@@ -316,7 +417,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
             <p className="text-sm text-blue-100 mt-1">Modifica los campos necesarios</p>
           </div>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="text-gray-200 hover:text-white transition-colors"
             aria-label="Cerrar modal"
           >
@@ -600,9 +701,43 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
             <div className="space-y-4">
               <h3 className="text-lg font-medium">Imágenes de la Propiedad</h3>
 
+              {/* Subir desde la computadora */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Agregar URL de Imagen
+                  Subir imágenes desde tu computadora
+                </label>
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  multiple
+                  onChange={handleFilesSelected}
+                  disabled={uploading || Object.keys(images).length >= MAX_IMAGES}
+                  className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-600 file:text-white hover:file:bg-blue-700 disabled:opacity-50"
+                />
+                <p className="mt-1 text-xs text-gray-500">
+                  JPG, PNG o WebP · máx. 10&nbsp;MB por archivo · se comprimen a WebP (máx. {MAX_IMAGES} imágenes).
+                </p>
+                {uploading && (
+                  <p className="mt-2 text-sm text-blue-600 flex items-center">
+                    <span className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-blue-600 mr-2" />
+                    Subiendo…
+                  </p>
+                )}
+                {sizeReport.length > 0 && (
+                  <ul className="mt-2 space-y-1 text-xs text-gray-600">
+                    {sizeReport.map((r, i) => (
+                      <li key={i}>
+                        <span className="font-medium">{r.name}</span>: {formatBytes(r.before)} →{' '}
+                        <span className="text-green-700 font-medium">{formatBytes(r.after)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  …o pegar una URL de imagen
                 </label>
                 <div className="flex space-x-2">
                   <input
@@ -715,7 +850,7 @@ export default function EditPropertyModal({ isOpen, onClose, onSuccess, property
             <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200 bg-white p-4 -mx-6 -mb-6 rounded-b-lg">
               <button
                 type="button"
-                onClick={onClose}
+                onClick={handleClose}
                 className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
                 disabled={loading}
               >
