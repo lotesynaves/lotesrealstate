@@ -80,9 +80,9 @@ export const config = {
   form: {
     heading: "Recibe opciones de naves en menos de 24 h",
     nameLabel: "Nombre",
-    namePlaceholder: "Tu nombre",
+    namePlaceholder: "Ej. Juan Pérez",
     phoneLabel: "Teléfono / WhatsApp",
-    phonePlaceholder: "10 dígitos",
+    phonePlaceholder: "Ej. +52 461 758 2094",
     typeLabel: "Tipo de nave",
     typeOptions: [
       "Renta de nave industrial",

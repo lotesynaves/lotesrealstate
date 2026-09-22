@@ -265,11 +265,11 @@
 
               <div class="field">
                 <label for="f-name">Nombre</label>
-                <input id="f-name" name="nombre" type="text" required autocomplete="name" placeholder="Tu nombre" />
+                <input id="f-name" name="nombre" type="text" required autocomplete="name" maxlength="50" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü .'-]{2,50}" title="Solo letras (sin números), 2 a 50 caracteres" placeholder="Ej. Juan Pérez" />
               </div>
               <div class="field">
                 <label for="f-phone">Teléfono / WhatsApp</label>
-                <input id="f-phone" name="telefono" type="tel" required autocomplete="tel" inputmode="tel" placeholder="10 dígitos" />
+                <input id="f-phone" name="telefono" type="tel" required autocomplete="tel" inputmode="tel" maxlength="14" pattern="\+?[0-9]{10,13}" title="10 dígitos más el código de país (ej. +52...)" placeholder="Ej. +52 461 758 2094" />
               </div>
               <div class="field">
                 <label for="f-type">Tipo de nave</label>
@@ -398,6 +398,26 @@
         if (ok) ok.style.display = 'block';
       }
       if (form) {
+        // Filtrado en vivo: teléfono solo números (+ código de país), nombre solo letras.
+        var phoneEl = form.querySelector('[name="telefono"]');
+        if (phoneEl) {
+          phoneEl.addEventListener('input', function () {
+            // Permite un "+" inicial y hasta 13 dígitos (código de país + 10).
+            var v = phoneEl.value.replace(/[^\d+]/g, '');
+            v = v.replace(/(?!^)\+/g, '');            // solo un "+" y al inicio
+            var plus = v.charAt(0) === '+' ? '+' : '';
+            var digits = v.replace(/\D/g, '').slice(0, 13);
+            phoneEl.value = plus + digits;
+          });
+        }
+        var nameEl = form.querySelector('[name="nombre"]');
+        if (nameEl) {
+          nameEl.addEventListener('input', function () {
+            nameEl.value = nameEl.value
+              .replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñÜü .'-]/g, '')
+              .slice(0, 50);
+          });
+        }
         form.addEventListener('submit', function (e) {
           e.preventDefault();
 
