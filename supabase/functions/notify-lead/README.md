@@ -3,19 +3,17 @@
 Edge Function que se dispara con un **Database Webhook** en cada `INSERT` a la
 tabla `leads` y envía un correo con los datos del lead usando **Resend**.
 
-- **Remitente:** `onboarding@resend.dev` (dominio de pruebas de Resend)
-- **Destinatario:** `bto2891@gmail.com`
+- **Remitente:** configurable vía `LEAD_NOTIFY_FROM` (dominio verificado en Resend)
+- **Destinatario:** configurable vía `LEAD_NOTIFY_TO`
 - **Project ref:** `nhyhilbvpcttjllunxhm`
-
-> ⚠️ **Modo rápido de Resend (sin dominio verificado):** solo se puede enviar al
-> correo de la cuenta de Resend (`bto2891@gmail.com`). Cuando verifiques un
-> dominio, cambia `FROM` en `index.ts` a `leads@tudominio.com` para enviar a otros.
 
 ## Secretos (nunca hardcodear ni ponerlos en el `.env` del frontend)
 
 | Secreto | Obligatorio | Descripción |
 |---|---|---|
 | `RESEND_API_KEY` | sí | API key de Resend |
+| `LEAD_NOTIFY_FROM` | sí | Remitente del correo, p.ej. `ARDE Leads <leads@navesylotesindustriales.com>` (dominio verificado en Resend) |
+| `LEAD_NOTIFY_TO` | sí | Destinatario de la notificación, p.ej. `propiedades@navesylotesindustriales.com` |
 | `WEBHOOK_SECRET` | no | Si se define, exige el header `x-webhook-secret` con ese valor |
 
 ## Deploy (correr desde la raíz del repo)
@@ -29,7 +27,7 @@ supabase login
 supabase link --project-ref nhyhilbvpcttjllunxhm
 
 # 3) Guardar el secreto SIN dejarlo en el historial del shell
-printf 'RESEND_API_KEY=re_xxx\n' > /tmp/notify-lead.secret
+printf 'RESEND_API_KEY=re_xxx\nLEAD_NOTIFY_FROM=ARDE Leads <leads@navesylotesindustriales.com>\nLEAD_NOTIFY_TO=propiedades@navesylotesindustriales.com\n' > /tmp/notify-lead.secret
 supabase secrets set --env-file /tmp/notify-lead.secret --project-ref nhyhilbvpcttjllunxhm
 rm /tmp/notify-lead.secret
 

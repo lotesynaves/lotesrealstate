@@ -7,19 +7,17 @@
 //   RESEND_API_KEY   API key de Resend (obligatorio)
 //   WEBHOOK_SECRET   opcional; si se define, se exige el header "x-webhook-secret"
 //                    con ese mismo valor (endurece: evita que cualquiera invoque la fn)
+//   LEAD_NOTIFY_FROM remitente del correo (obligatorio), p.ej. "ARDE Leads <leads@navesylotesindustriales.com>"
+//   LEAD_NOTIFY_TO   destinatario del correo (obligatorio), p.ej. "propiedades@navesylotesindustriales.com"
 //
 // Deploy sin verificación de JWT (el webhook de la BD no manda un JWT de usuario):
 //   supabase functions deploy notify-lead --no-verify-jwt
-//
-// Modo rápido de Resend (sin dominio verificado): el remitente es el dominio de
-// pruebas "onboarding@resend.dev" y SOLO se puede enviar al correo de la cuenta
-// de Resend (aquí, el mismo destinatario).
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const WEBHOOK_SECRET = Deno.env.get("WEBHOOK_SECRET"); // opcional
 
-const FROM = "ARDE Leads <onboarding@resend.dev>";
-const TO = "bto2891@gmail.com";
+const FROM = Deno.env.get("LEAD_NOTIFY_FROM");
+const TO = Deno.env.get("LEAD_NOTIFY_TO");
 
 /** Escapa texto para incrustarlo en HTML sin romper el markup. */
 function esc(v: unknown): string {
@@ -61,6 +59,14 @@ Deno.serve(async (req) => {
     if (!RESEND_API_KEY) {
       console.error("Falta el secreto RESEND_API_KEY");
       return new Response("Missing RESEND_API_KEY", { status: 500 });
+    }
+
+    if (!FROM || !TO) {
+      console.error(
+        "Faltan variables de entorno: LEAD_NOTIFY_FROM y/o LEAD_NOTIFY_TO",
+        { hasFrom: Boolean(FROM), hasTo: Boolean(TO) },
+      );
+      return new Response("Missing LEAD_NOTIFY_FROM/LEAD_NOTIFY_TO", { status: 500 });
     }
 
     // Payload del Database Webhook: { type, table, schema, record, old_record }
