@@ -344,7 +344,7 @@
           </div>
           <div class="cta-row">
             <a class="btn btn-primary" href="#form-lead">Quiero mi cotización</a>
-            <a class="btn btn-wa" href="https://wa.me/524424613233?text=Hola%2C%20me%20interesa%20una%20nave%20industrial%20en%20Quer%C3%A9taro.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%3F" target="_blank" rel="noopener" data-wa data-wa-location="final">
+            <a class="btn btn-wa" href="https://wa.me/524424613233?text=Hola%2C%20me%20interesa%20una%20nave%20industrial%20en%20Quer%C3%A9taro.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%3F" target="_blank" rel="noopener" data-wa data-wa-location="cta-final">
               <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.8.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-4.9 1 1-4.8-.3-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10.1-9.9 10.1zm5.5-7.4c-.3-.2-1.8-.9-2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1c-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2.9 1.2 2.9.8 3.5.8.5 0 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/></svg>
               WhatsApp directo: 442 461 3233
             </a>
@@ -361,7 +361,7 @@
     </footer>
 
     <!-- Botón flotante WhatsApp (siempre visible) -->
-    <a class="wa-float" href="https://wa.me/524424613233?text=Hola%2C%20me%20interesa%20una%20nave%20industrial%20en%20Quer%C3%A9taro.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%3F" target="_blank" rel="noopener" data-wa data-wa-location="float" aria-label="Contáctanos por WhatsApp">
+    <a class="wa-float" href="https://wa.me/524424613233?text=Hola%2C%20me%20interesa%20una%20nave%20industrial%20en%20Quer%C3%A9taro.%20%C2%BFMe%20pueden%20dar%20informaci%C3%B3n%3F" target="_blank" rel="noopener" data-wa data-wa-location="flotante" aria-label="Contáctanos por WhatsApp">
       <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.8.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-4.9 1 1-4.8-.3-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10.1-9.9 10.1zm5.5-7.4c-.3-.2-1.8-.9-2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1c-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2.9 1.2 2.9.8 3.5.8.5 0 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/></svg>
       <span class="badge">!</span>
     </a>
@@ -378,7 +378,7 @@
         el.addEventListener('click', function () {
           window.dataLayer.push({
             event: 'whatsapp_click',
-            wa_location: el.getAttribute('data-wa-location') || 'unknown'
+            ubicacion: el.getAttribute('data-wa-location') || 'unknown'
           });
         });
       });
@@ -421,9 +421,6 @@
         form.addEventListener('submit', function (e) {
           e.preventDefault();
 
-          var tipo = (form.querySelector('[name="tipo_de_nave"]') || {}).value || '';
-          window.dataLayer.push({ event: 'form_submit_lead', lead_tipo_nave: tipo });
-
           // Guardar el lead también en Supabase (tabla "leads").
           try {
             var sbData = new FormData(form);
@@ -440,7 +437,17 @@
                 telefono: sbData.get('telefono') || '',
                 tipo_de_nave: sbData.get('tipo_de_nave') || ''
               })
-            }).catch(function (err) { console.error('Supabase lead insert failed', err); });
+            })
+            .then(function (res) {
+              if (res.ok) {
+                window.dataLayer.push({
+                  event: 'form_submit_lead',
+                  form_id: 'landing-naves-queretaro',
+                  tipo_de_nave: sbData.get('tipo_de_nave') || ''
+                });
+              }
+            })
+            .catch(function (err) { console.error('Supabase lead insert failed', err); });
           } catch (err) { console.error('Supabase lead insert error', err); }
 
           var btn = form.querySelector('button[type="submit"]');

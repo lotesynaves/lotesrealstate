@@ -58,7 +58,17 @@ const supabaseInsertJs = sbEndpoint
                 telefono: sbData.get('telefono') || '',
                 tipo_de_nave: sbData.get('tipo_de_nave') || ''
               })
-            }).catch(function (err) { console.error('Supabase lead insert failed', err); });
+            })
+            .then(function (res) {
+              if (res.ok) {
+                window.dataLayer.push({
+                  event: 'form_submit_lead',
+                  form_id: 'landing-naves-queretaro',
+                  tipo_de_nave: sbData.get('tipo_de_nave') || ''
+                });
+              }
+            })
+            .catch(function (err) { console.error('Supabase lead insert failed', err); });
           } catch (err) { console.error('Supabase lead insert error', err); }
 `
   : "";
@@ -416,7 +426,7 @@ const html = `<!DOCTYPE html>
           </div>
           <div class="cta-row">
             <a class="btn btn-primary" href="#form-lead">${esc(c.form.submitLabel)}</a>
-            <a class="btn btn-wa" href="${waHref}" target="_blank" rel="noopener" data-wa data-wa-location="final">
+            <a class="btn btn-wa" href="${waHref}" target="_blank" rel="noopener" data-wa data-wa-location="cta-final">
               ${waIcon}
               ${esc(c.hero.whatsappLabel)}: ${esc(c.contact.phoneDisplay)}
             </a>
@@ -433,7 +443,7 @@ const html = `<!DOCTYPE html>
     </footer>
 
     <!-- Botón flotante WhatsApp (siempre visible) -->
-    <a class="wa-float" href="${waHref}" target="_blank" rel="noopener" data-wa data-wa-location="float" aria-label="Contáctanos por WhatsApp">
+    <a class="wa-float" href="${waHref}" target="_blank" rel="noopener" data-wa data-wa-location="flotante" aria-label="Contáctanos por WhatsApp">
       ${waIcon}
       <span class="badge">!</span>
     </a>
@@ -450,7 +460,7 @@ const html = `<!DOCTYPE html>
         el.addEventListener('click', function () {
           window.dataLayer.push({
             event: 'whatsapp_click',
-            wa_location: el.getAttribute('data-wa-location') || 'unknown'
+            ubicacion: el.getAttribute('data-wa-location') || 'unknown'
           });
         });
       });
@@ -492,9 +502,6 @@ const html = `<!DOCTYPE html>
         }
         form.addEventListener('submit', function (e) {
           e.preventDefault();
-
-          var tipo = (form.querySelector('[name="tipo_de_nave"]') || {}).value || '';
-          window.dataLayer.push({ event: 'form_submit_lead', lead_tipo_nave: tipo });
 ${supabaseInsertJs}
           var btn = form.querySelector('button[type="submit"]');
           var btnText = btn ? btn.textContent : '';
