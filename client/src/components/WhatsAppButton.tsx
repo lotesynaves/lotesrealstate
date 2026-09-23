@@ -23,7 +23,7 @@ export default function WhatsAppButton({
   return (
     <Button
       onClick={handleClick}
-      className={`gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white ${className}`}
+      className={`gap-2 bg-[#0C8040] hover:bg-[#0A6E37] text-white ${className}`}
       variant={variant}
       data-testid="button-whatsapp"
     >

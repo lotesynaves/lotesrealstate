@@ -16,7 +16,7 @@ export default function FloatingWhatsAppButton({
   return (
     <button
       onClick={handleClick}
-      className={`fixed bottom-8 right-8 bg-[#25D366] hover:bg-[#20BA5A] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center z-50 ${className}`}
+      className={`fixed bottom-8 right-8 bg-[#0C8040] hover:bg-[#0A6E37] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center z-50 ${className}`}
       aria-label="Contáctanos"
       data-testid="floating-contact-button"
     >
