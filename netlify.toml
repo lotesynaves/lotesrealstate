@@ -6,6 +6,12 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Alias histórico del aviso de privacidad -> URL canónica (debe ir ANTES del catch-all).
+[[redirects]]
+  from = "/politica-privacidad"
+  to = "/aviso-de-privacidad"
+  status = 301
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

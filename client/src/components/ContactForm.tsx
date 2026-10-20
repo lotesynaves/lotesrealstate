@@ -212,12 +212,12 @@ export default function ContactForm({ propertyRef, onSubmit }: ContactFormProps)
         
         <div className="mt-10 text-center">
           <p className="text-gray-500 dark:text-gray-400 text-sm">
-            Al enviar este formulario, aceptas nuestra{' '}
-            <a 
-              href="/politica-privacidad" 
+            Al enviar este formulario, aceptas nuestro{' '}
+            <a
+              href="/aviso-de-privacidad"
               className="text-gray-700 dark:text-blue-400 font-medium hover:text-gray-900 dark:hover:text-blue-300 hover:underline transition-colors"
             >
-              Política de Privacidad
+              aviso de privacidad
             </a>
           </p>
         </div>

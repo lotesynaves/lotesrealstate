@@ -1,1 +1,4 @@
+# Alias histórico del aviso de privacidad -> URL canónica (antes del catch-all).
+/politica-privacidad    /aviso-de-privacidad    301
+
 /*    /index.html   200

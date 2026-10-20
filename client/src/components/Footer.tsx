@@ -97,6 +97,15 @@ export default function Footer() {
 
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
           <p>© 2024 NavesIndustriales. Todos los derechos reservados.</p>
+          <p className="mt-2">
+            <a
+              href="/aviso-de-privacidad"
+              className="hover:text-foreground transition-colors"
+              data-testid="link-privacy"
+            >
+              Aviso de privacidad
+            </a>
+          </p>
         </div>
       </div>
     </footer>

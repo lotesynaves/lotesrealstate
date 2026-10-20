@@ -252,6 +252,8 @@ const html = `<!DOCTYPE html>
       input:focus, select:focus { outline: none; border-color: hsl(var(--primary)); box-shadow: 0 0 0 3px hsl(var(--primary) / 0.18); }
       .form-card .btn { width: 100%; margin-top: 6px; }
       .disclaimer { font-size: 12px; color: hsl(var(--muted-foreground)); margin: 14px 0 0; text-align: center; }
+      .disclaimer-privacy { margin-top: 6px; }
+      .disclaimer-privacy a { color: hsl(var(--primary)); font-weight: 600; text-decoration: underline; }
       .form-success {
         display: none; background: hsl(var(--primary) / 0.06); border: 1px solid hsl(var(--primary) / 0.22);
         color: hsl(217 71% 36%); padding: 18px; border-radius: 12px; font-weight: 600;
@@ -384,6 +386,7 @@ const html = `<!DOCTYPE html>
               </div>
               <button class="btn btn-primary" type="submit">${esc(c.form.submitLabel)}</button>
               <p class="disclaimer">${esc(c.form.disclaimer)}</p>
+              <p class="disclaimer disclaimer-privacy">Al enviar aceptas nuestro <a href="/aviso-de-privacidad">aviso de privacidad</a>.</p>
             </form>
 
             <div class="form-success" id="form-success">${esc(c.form.successMessage)}</div>
@@ -438,6 +441,7 @@ const html = `<!DOCTYPE html>
     <footer class="site-footer">
       <div class="wrap">
         <span>© <span id="yr"></span> ${esc(c.brand)}. ${esc(c.footer.note)}</span>
+        <a href="/aviso-de-privacidad">Aviso de privacidad</a>
         <a href="${telHref}" data-wa-tel>${esc(c.contact.phoneDisplay)}</a>
       </div>
     </footer>
